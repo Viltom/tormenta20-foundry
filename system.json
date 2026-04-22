@@ -145,6 +145,6 @@
   "secondaryTokenAttribute": "pm",
   "socket": false,
   "url": "https://github.com/Viltom/tormenta20-foundry",
-  "manifest": "https://raw.githubusercontent.com/Viltom/tormenta20-foundry/main/tormenta20/system.json",
+  "manifest": "https://raw.githubusercontent.com/Viltom/tormenta20-foundry/main/system.json",
   "download": "https://github.com/Viltom/tormenta20-foundry/releases/latest/download/tormenta20.zip"
 }
