@@ -1,0 +1,310 @@
+<form class="{{cssClass}} t20-sheet t20-item-sheet" autocomplete="off">
+
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="48" width="48" />
+    <h1 class="item-name">
+      <input name="name" type="text" value="{{item.name}}" placeholder="Nome do Item" />
+    </h1>
+    <span class="item-type">{{item.type}}</span>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="descricao"><i class="fas fa-align-left"></i> Descrição</a>
+    <a class="item" data-tab="detalhes"><i class="fas fa-cogs"></i> Detalhes</a>
+    {{#if (or (eq item.type "arma") (or (eq item.type "armadura") (eq item.type "equipamento")))}}
+    <a class="item" data-tab="melhorias"><i class="fas fa-gem"></i> Melhorias</a>
+    {{/if}}
+  </nav>
+
+  <section class="sheet-body">
+
+    {{!-- Tab Descrição --}}
+    <div class="tab descricao" data-group="primary" data-tab="descricao">
+      <div class="editor-wrapper">
+        {{editor system.descricao target="system.descricao" button=true editable=true}}
+      </div>
+    </div>
+
+    {{!-- Tab Detalhes --}}
+    <div class="tab detalhes" data-group="primary" data-tab="detalhes">
+
+      {{#if (eq item.type "arma")}}
+        <div class="form-group"><label>Dano</label><input type="text" name="system.dano" value="{{system.dano}}" /></div>
+        <div class="form-group"><label>Crítico</label><input type="text" name="system.critico" value="{{system.critico}}" /></div>
+        <div class="form-group"><label>Tipo de Dano</label>
+          <select name="system.tipo">
+            <option value="corte" {{#if (eq system.tipo "corte")}}selected{{/if}}>Corte</option>
+            <option value="perfuração" {{#if (eq system.tipo "perfuração")}}selected{{/if}}>Perfuração</option>
+            <option value="impacto" {{#if (eq system.tipo "impacto")}}selected{{/if}}>Impacto</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Alcance</label>
+          <select name="system.alcance">
+            <option value="" {{#if (eq system.alcance "")}}selected{{/if}}>Corpo a corpo</option>
+            <option value="curto" {{#if (eq system.alcance "curto")}}selected{{/if}}>Curto</option>
+            <option value="médio" {{#if (eq system.alcance "médio")}}selected{{/if}}>Médio</option>
+            <option value="longo" {{#if (eq system.alcance "longo")}}selected{{/if}}>Longo</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Grupo</label>
+          <select name="system.grupo">
+            <option value="simples" {{#if (eq system.grupo "simples")}}selected{{/if}}>Simples</option>
+            <option value="marcial" {{#if (eq system.grupo "marcial")}}selected{{/if}}>Marcial</option>
+            <option value="exótica" {{#if (eq system.grupo "exótica")}}selected{{/if}}>Exótica</option>
+            <option value="fogo" {{#if (eq system.grupo "fogo")}}selected{{/if}}>Arma de Fogo</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Empunhadura</label>
+          <select name="system.empunhadura">
+            <option value="leve" {{#if (eq system.empunhadura "leve")}}selected{{/if}}>Leve</option>
+            <option value="umaMao" {{#if (eq system.empunhadura "umaMao")}}selected{{/if}}>Uma Mão</option>
+            <option value="duasMaos" {{#if (eq system.empunhadura "duasMaos")}}selected{{/if}}>Duas Mãos</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Propriedades</label><input type="text" name="system.propriedades" value="{{system.propriedades}}" /></div>
+        <div class="form-group fg-row">
+          <div class="fg-half"><label>Preço (T$)</label><input type="number" name="system.preco" value="{{system.preco}}" /></div>
+          <div class="fg-half"><label>Espaços</label><input type="number" name="system.espacos" value="{{system.espacos}}" /></div>
+        </div>
+        <div class="form-group fg-row">
+          <div class="fg-half"><label>Bônus Ataque</label><input type="number" name="system.bonusAtaque" value="{{system.bonusAtaque}}" /></div>
+          <div class="fg-half"><label>Bônus Dano</label><input type="number" name="system.bonusDano" value="{{system.bonusDano}}" /></div>
+        </div>
+        <div class="form-group"><label><input type="checkbox" name="system.equipada" {{checked system.equipada}} /> Equipada</label></div>
+
+        {{!-- ── Modo Statblock (NPCs/monstros) ── --}}
+        <div class="form-group fg-statblock-hdr">Modo Statblock (NPC/Monstro)</div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" name="system.ataqueNatural" {{checked system.ataqueNatural}} />
+            Ataque Natural / Statblock — usa Bônus Ataque como total final (ignora Luta/Pontaria)
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" name="system.ignoraAtributoDano" {{checked system.ignoraAtributoDano}} />
+            Ignorar atributo no dano — útil quando o statblock já traz o dano final (ex: "1d6+3")
+          </label>
+        </div>
+        <div class="form-group fg-row">
+          <div class="fg-half"><label>Nº de Ataques por uso</label><input type="number" name="system.numAtaques" value="{{system.numAtaques}}" min="1" max="10" /></div>
+          <div class="fg-half"><label>Penalidade por extra</label><input type="number" name="system.penalidadeMultiplos" value="{{system.penalidadeMultiplos}}" title="Ex: -2 ou -5 acumulativo por ataque extra" /></div>
+        </div>
+      {{/if}}
+
+      {{#if (eq item.type "armadura")}}
+        <div class="form-group"><label>Defesa</label><input type="number" name="system.defesa" value="{{system.defesa}}" /></div>
+        <div class="form-group"><label>Penalidade</label><input type="number" name="system.penalidade" value="{{system.penalidade}}" /></div>
+        <div class="form-group"><label>Tipo</label>
+          <select name="system.tipo">
+            <option value="leve" {{#if (eq system.tipo "leve")}}selected{{/if}}>Leve</option>
+            <option value="pesada" {{#if (eq system.tipo "pesada")}}selected{{/if}}>Pesada</option>
+            <option value="escudo" {{#if (eq system.tipo "escudo")}}selected{{/if}}>Escudo</option>
+          </select>
+        </div>
+        <div class="form-group fg-row">
+          <div class="fg-half"><label>Preço (T$)</label><input type="number" name="system.preco" value="{{system.preco}}" /></div>
+          <div class="fg-half"><label>Espaços</label><input type="number" name="system.espacos" value="{{system.espacos}}" /></div>
+        </div>
+        <div class="form-group"><label><input type="checkbox" name="system.equipada" {{checked system.equipada}} /> Equipada</label></div>
+      {{/if}}
+
+      {{#if (eq item.type "magia")}}
+        <div class="form-group"><label>Tipo</label>
+          <select name="system.tipo">
+            <option value="arcana" {{#if (eq system.tipo "arcana")}}selected{{/if}}>Arcana</option>
+            <option value="divina" {{#if (eq system.tipo "divina")}}selected{{/if}}>Divina</option>
+            <option value="universal" {{#if (eq system.tipo "universal")}}selected{{/if}}>Universal</option>
+          </select>
+        </div>
+        <div class="form-group fg-row">
+          <div class="fg-half"><label>Círculo</label><input type="number" name="system.circulo" value="{{system.circulo}}" min="1" max="5" /></div>
+          <div class="fg-half"><label>Custo PM</label><input type="number" name="system.custoPM" value="{{system.custoPM}}" /></div>
+        </div>
+        <div class="form-group"><label>Escola</label><input type="text" name="system.escola" value="{{system.escola}}" /></div>
+        <div class="form-group"><label>Execução</label><input type="text" name="system.execucao" value="{{system.execucao}}" /></div>
+        <div class="form-group"><label>Alcance</label><input type="text" name="system.alcance" value="{{system.alcance}}" /></div>
+        <div class="form-group"><label>Alvo</label><input type="text" name="system.alvo" value="{{system.alvo}}" /></div>
+        <div class="form-group"><label>Área/Efeito</label><input type="text" name="system.area" value="{{system.area}}" /></div>
+        <div class="form-group"><label>Duração</label><input type="text" name="system.duracao" value="{{system.duracao}}" /></div>
+        <div class="form-group"><label>Resistência</label><input type="text" name="system.resistencia" value="{{system.resistencia}}" /></div>
+
+        {{!-- ★ Campos de Dano da Magia --}}
+        <fieldset class="t20-fieldset" style="margin-top:8px;border-color:#c53131">
+          <legend style="color:#c53131"><i class="fas fa-fire"></i> Dano da Magia</legend>
+          <div class="form-group"><label>Fórmula de Dano</label><input type="text" name="system.dano" value="{{system.dano}}" placeholder="ex: 2d6, 4d6+2, 6d8" /></div>
+          <div class="form-group"><label>Tipo de Dano</label>
+            <select name="system.tipoDano">
+              <option value="" {{#if (eq system.tipoDano "")}}selected{{/if}}>Nenhum</option>
+              <option value="fogo" {{#if (eq system.tipoDano "fogo")}}selected{{/if}}>Fogo</option>
+              <option value="frio" {{#if (eq system.tipoDano "frio")}}selected{{/if}}>Frio</option>
+              <option value="eletricidade" {{#if (eq system.tipoDano "eletricidade")}}selected{{/if}}>Eletricidade</option>
+              <option value="ácido" {{#if (eq system.tipoDano "ácido")}}selected{{/if}}>Ácido</option>
+              <option value="luz" {{#if (eq system.tipoDano "luz")}}selected{{/if}}>Luz</option>
+              <option value="trevas" {{#if (eq system.tipoDano "trevas")}}selected{{/if}}>Trevas</option>
+              <option value="essência" {{#if (eq system.tipoDano "essência")}}selected{{/if}}>Essência</option>
+              <option value="psíquico" {{#if (eq system.tipoDano "psíquico")}}selected{{/if}}>Psíquico</option>
+              <option value="sônico" {{#if (eq system.tipoDano "sônico")}}selected{{/if}}>Sônico</option>
+              <option value="corte" {{#if (eq system.tipoDano "corte")}}selected{{/if}}>Corte</option>
+              <option value="perfuração" {{#if (eq system.tipoDano "perfuração")}}selected{{/if}}>Perfuração</option>
+              <option value="impacto" {{#if (eq system.tipoDano "impacto")}}selected{{/if}}>Impacto</option>
+            </select>
+          </div>
+          <p class="hint">Preencha a fórmula para habilitar o botão "Rolar Dano" no chat ao conjurar.</p>
+        </fieldset>
+      {{/if}}
+
+      {{#if (eq item.type "poder")}}
+        <div class="form-group"><label>Tipo</label>
+          <select name="system.tipo">
+            <option value="combate" {{#if (eq system.tipo "combate")}}selected{{/if}}>Combate</option>
+            <option value="destino" {{#if (eq system.tipo "destino")}}selected{{/if}}>Destino</option>
+            <option value="magia" {{#if (eq system.tipo "magia")}}selected{{/if}}>Magia</option>
+            <option value="tormenta" {{#if (eq system.tipo "tormenta")}}selected{{/if}}>Tormenta</option>
+            <option value="concedido" {{#if (eq system.tipo "concedido")}}selected{{/if}}>Concedido</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Ação</label><input type="text" name="system.acao" value="{{system.acao}}" /></div>
+        <div class="form-group"><label>Custo PM</label><input type="number" name="system.custoPM" value="{{system.custoPM}}" /></div>
+        <div class="form-group"><label>Requisitos</label><input type="text" name="system.requisitos" value="{{system.requisitos}}" /></div>
+      {{/if}}
+
+      {{#if (eq item.type "equipamento")}}
+        <div class="form-group"><label>Categoria</label><input type="text" name="system.categoria" value="{{system.categoria}}" /></div>
+        <div class="form-group fg-row">
+          <div class="fg-half"><label>Quantidade</label><input type="number" name="system.quantidade" value="{{system.quantidade}}" /></div>
+          <div class="fg-half"><label>Espaços</label><input type="number" name="system.espacos" value="{{system.espacos}}" step="0.5" /></div>
+        </div>
+        <div class="form-group"><label>Preço</label><input type="text" name="system.preco" value="{{system.preco}}" /></div>
+      {{/if}}
+
+      {{#if (eq item.type "habilidade")}}
+        <div class="form-group"><label>Tipo</label><input type="text" name="system.tipo" value="{{system.tipo}}" /></div>
+        <div class="form-group"><label>Fonte</label><input type="text" name="system.fonte" value="{{system.fonte}}" /></div>
+      {{/if}}
+
+      {{!-- ═══════════ INVENÇÃO (ENGENHOCA) ═══════════ --}}
+      {{#if (eq item.type "invencao")}}
+        <fieldset class="t20-fieldset" style="border-color:#c7a16b">
+          <legend style="color:#c7a16b"><i class="fas fa-cog"></i> Dados da Engenhoca</legend>
+          <div class="form-group">
+            <label>Magia Simulada</label>
+            <input type="text" name="system.magiaSim" value="{{system.magiaSim}}" readonly placeholder="Clique para selecionar..." class="inv-pick-magia" style="cursor:pointer" />
+          </div>
+          <div class="form-group fg-row">
+            <div class="fg-half"><label>Círculo da Magia</label><input type="number" name="system.circuloMagia" value="{{system.circuloMagia}}" min="1" max="5" readonly style="opacity:0.7" title="Auto-preenchido pela magia selecionada" /></div>
+            <div class="fg-half"><label>PM da Magia</label><input type="number" name="system.custoPMmagia" value="{{system.custoPMmagia}}" min="0" readonly style="opacity:0.7" title="Auto-preenchido pela magia selecionada" /></div>
+          </div>
+          <div class="form-group fg-row">
+            <div class="fg-half"><label>Custo Fabricação (T$)</label><input type="number" name="system.custoFab" value="{{system.custoFab}}" readonly style="opacity:0.7" title="T$ 100 × PM (auto)" /></div>
+            <div class="fg-half"><label>CD de Ativação</label><input type="number" name="system.cdAtivacao" value="{{system.cdAtivacao}}" readonly style="opacity:0.7" title="15 + PM (auto)" /></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="t20-fieldset" style="border-color:#c53131">
+          <legend style="color:#c53131"><i class="fas fa-heart"></i> Estatísticas</legend>
+          <div class="form-group fg-row">
+            <div class="fg-half"><label>PV Atual</label><input type="number" name="system.pvAtual" value="{{system.pvAtual}}" /></div>
+            <div class="fg-half"><label>PV Máximo</label><input type="number" name="system.pvMax" value="{{system.pvMax}}" /></div>
+          </div>
+          <div class="form-group fg-row">
+            <div class="fg-half"><label>Defesa</label><input type="number" name="system.defesa" value="{{system.defesa}}" /></div>
+            <div class="fg-half"><label>RD</label><input type="number" name="system.rd" value="{{system.rd}}" /></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="t20-fieldset">
+          <legend><i class="fas fa-sliders-h"></i> Configuração</legend>
+          <div class="form-group"><label>Tipo de Porte</label>
+            <select name="system.tipoPorte">
+              <option value="empunhada" {{#if (eq system.tipoPorte "empunhada")}}selected{{/if}}>Empunhada</option>
+              <option value="vestida" {{#if (eq system.tipoPorte "vestida")}}selected{{/if}}>Vestida</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Status</label>
+            <select name="system.status">
+              <option value="funcional" {{#if (eq system.status "funcional")}}selected{{/if}}>Funcional</option>
+              <option value="enguicada" {{#if (eq system.status "enguicada")}}selected{{/if}}>Enguiçada</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Ativações Hoje</label><input type="number" name="system.ativacoesHoje" value="{{system.ativacoesHoje}}" min="0" /></div>
+        </fieldset>
+
+        <div class="form-group"><label>Efeito / Descrição Mecânica</label>
+          <textarea name="system.efeito" rows="3" class="t20-textarea" placeholder="Descreva o efeito mecânico ao ativar...">{{system.efeito}}</textarea>
+        </div>
+        <div class="form-group"><label>Notas</label>
+          <textarea name="system.notas" rows="2" class="t20-textarea" placeholder="Notas adicionais...">{{system.notas}}</textarea>
+        </div>
+      {{/if}}
+
+    </div>
+
+    {{!-- Tab Melhorias (armas, armaduras, equipamentos) --}}
+    {{#if (or (eq item.type "arma") (or (eq item.type "armadura") (eq item.type "equipamento")))}}
+    <div class="tab melhorias" data-group="primary" data-tab="melhorias">
+      <div class="form-group">
+        <label>Material Especial</label>
+        <select name="system.material" class="t20-select">
+          <option value="" {{#if (eq system.material "")}}selected{{/if}}>Nenhum</option>
+          <option value="aço-rubi" {{#if (eq system.material "aço-rubi")}}selected{{/if}}>Aço-Rubi</option>
+          <option value="adamante" {{#if (eq system.material "adamante")}}selected{{/if}}>Adamante</option>
+          <option value="gelo-eterno" {{#if (eq system.material "gelo-eterno")}}selected{{/if}}>Gelo Eterno</option>
+          <option value="madeira-ironwood" {{#if (eq system.material "madeira-ironwood")}}selected{{/if}}>Madeira Ironwood</option>
+          <option value="matite" {{#if (eq system.material "matite")}}selected{{/if}}>Matite</option>
+          <option value="mitral" {{#if (eq system.material "mitral")}}selected{{/if}}>Mitral</option>
+          <option value="mogno-negro" {{#if (eq system.material "mogno-negro")}}selected{{/if}}>Mogno Negro</option>
+          <option value="prata-alquimica" {{#if (eq system.material "prata-alquimica")}}selected{{/if}}>Prata Alquímica</option>
+          <option value="sangue-de-dragao" {{#if (eq system.material "sangue-de-dragao")}}selected{{/if}}>Sangue de Dragão</option>
+        </select>
+      </div>
+
+      {{#if (eq item.type "arma")}}
+      <fieldset class="t20-fieldset"><legend>Melhorias de Arma</legend>
+        <label class="t20-chk"><input type="checkbox" name="system.mCerteira" {{checked system.mCerteira}} /> Certeira (+1 ataque)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mPungente" {{checked system.mPungente}} /> Pungente (+2 ataque)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mCruel" {{checked system.mCruel}} /> Cruel (+1 dano)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mAtroz" {{checked system.mAtroz}} /> Atroz (+2 dano)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mEquilibrada" {{checked system.mEquilibrada}} /> Equilibrada (+2 manobras)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mHarmonizada" {{checked system.mHarmonizada}} /> Harmonizada (-1 PM habilidades)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mInjecao" {{checked system.mInjecao}} /> Injeção Alquímica</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mMacica" {{checked system.mMacica}} /> Maciça (+1 mult. crítico)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mPrecisa" {{checked system.mPrecisa}} /> Precisa (+1 margem ameaça)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mMira" {{checked system.mMira}} /> Mira Telescópica (+alcance)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mMacabro" {{checked system.mMacabro}} /> Macabro (+2 Intimidação)</label>
+      </fieldset>
+      {{/if}}
+
+      {{#if (eq item.type "armadura")}}
+      <fieldset class="t20-fieldset"><legend>Melhorias de Armadura</legend>
+        <label class="t20-chk"><input type="checkbox" name="system.mAjustada" {{checked system.mAjustada}} /> Ajustada (-1 penalidade)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mSobMedida" {{checked system.mSobMedida}} /> Sob Medida (-2 penalidade)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mDelicada" {{checked system.mDelicada}} /> Delicada (+1 Des na Defesa)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mPolida" {{checked system.mPolida}} /> Polida (+2 Def 1ª rodada)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mReforcada" {{checked system.mReforcada}} /> Reforçada (+1 Defesa)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mSelada" {{checked system.mSelada}} /> Selada (+1 resistências)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mEspinhosa" {{checked system.mEspinhosa}} /> Espinhosa (dano agarrar)</label>
+      </fieldset>
+      {{/if}}
+
+      <fieldset class="t20-fieldset"><legend>Melhorias Gerais</legend>
+        <label class="t20-chk"><input type="checkbox" name="system.mBanhado" {{checked system.mBanhado}} /> Banhado a Ouro (+2 Diplomacia)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mCravejado" {{checked system.mCravejado}} /> Cravejado de Gemas (+2 Enganação)</label>
+        <label class="t20-chk"><input type="checkbox" name="system.mDiscreto" {{checked system.mDiscreto}} /> Discreto (-1 espaço, +5 ocultar)</label>
+      </fieldset>
+
+      <div class="form-group">
+        <label>Bônus na CD de Magias</label>
+        <input type="number" name="system.bonusCD" value="{{system.bonusCD}}" />
+        <p class="hint">Se este item concede bônus na CD (ex: item com Poderoso).</p>
+      </div>
+
+      <div class="form-group">
+        <label>Notas de Melhorias</label>
+        <textarea name="system.melhorias" rows="2" class="t20-textarea" placeholder="Notas adicionais...">{{system.melhorias}}</textarea>
+      </div>
+    </div>
+    {{/if}}
+
+  </section>
+</form>

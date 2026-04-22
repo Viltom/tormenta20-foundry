@@ -1,0 +1,412 @@
+<form class="{{cssClass}} t20-sheet" autocomplete="off">
+
+  {{!-- ═══════════ HEADER ═══════════ --}}
+  <header class="sheet-header">
+    <div class="hdr-row1">
+      <div class="hdr-portrait">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        <div class="hdr-badge">{{system.biografia.nivel}}</div>
+        <button type="button" class="hdr-pdf-import" title="Importar ficha de PDF (T20 / Jambo)">
+          <i class="fas fa-file-pdf"></i>
+        </button>
+      </div>
+
+      <div class="hdr-center">
+        <input class="hdr-name" name="name" type="text" value="{{actor.name}}" placeholder="Nome do Personagem" />
+        <div class="hdr-meta">
+          <div class="hm hm--classe"><label>Classe</label><input type="text" name="system.biografia.classe" value="{{#if system._classeDisplay}}{{system._classeDisplay}}{{else}}{{system.biografia.classe}}{{/if}}" class="hdr-pick" data-pick="classe" readonly placeholder="Clique" title="Clique para gerenciar classes (multiclasse)" /></div>
+          <div class="hm"><label>Sub</label><input type="text" name="system.biografia.subclasse" value="{{system.biografia.subclasse}}" class="hdr-pick" data-pick="subclasse" readonly placeholder="Subtipo" /></div>
+          <div class="hm"><label>Raça</label><input type="text" name="system.biografia.raca" value="{{system.biografia.raca}}" class="hdr-pick" data-pick="raca" readonly placeholder="Clique" /></div>
+          <div class="hm hm--xs"><label>Nível</label><input type="number" name="system.biografia.nivel" value="{{system.biografia.nivel}}" min="1" max="20" /></div>
+          <div class="hm"><label>Origem</label><input type="text" name="system.biografia.origem" value="{{system.biografia.origem}}" class="hdr-pick" data-pick="origem" readonly placeholder="Clique" /></div>
+          <div class="hm"><label>Divindade</label><input type="text" name="system.biografia.divindade" value="{{system.biografia.divindade}}" /></div>
+          <div class="hm"><label>Distinção</label><input type="text" name="system.biografia.distincao" value="{{system.biografia.distincao}}" class="hdr-pick" data-pick="distincao" readonly placeholder="Clique" /></div>
+        </div>
+      </div>
+
+      <div class="hdr-res hdr-pv">
+        <div class="res-label"><i class="fas fa-heart"></i> PV</div>
+        <div class="res-nums">
+          <input type="number" name="system.pv.value" value="{{system.pv.value}}" class="res-cur" />
+          <span>/</span>
+          <span class="res-max-auto" title="Auto: nível × (PV classe + Con) + bônus">{{system.pv.max}}</span>
+        </div>
+        <div class="res-bar"><div class="res-fill pv-fill" style="width:{{#if system.pv.max}}{{math system.pv.value '/' system.pv.max '*' 100}}%{{else}}0%{{/if}}"></div></div>
+        <div class="res-sub"><span>Temp</span><input type="number" name="system.pv.temp" value="{{system.pv.temp}}" class="res-tiny" /><span>Bônus</span><input type="number" name="system.pv.bonus" value="{{system.pv.bonus}}" class="res-tiny" /></div>
+      </div>
+
+      <div class="hdr-res hdr-pm">
+        <div class="res-label"><i class="fas fa-star"></i> PM</div>
+        <div class="res-nums">
+          <input type="number" name="system.pm.value" value="{{system.pm.value}}" class="res-cur" />
+          <span>/</span>
+          <span class="res-max-auto" title="Auto: PM classe × nível + Atr.Chave + bônus">{{system.pm.max}}</span>
+        </div>
+        <div class="res-bar"><div class="res-fill pm-fill" style="width:{{#if system.pm.max}}{{math system.pm.value '/' system.pm.max '*' 100}}%{{else}}0%{{/if}}"></div></div>
+        <div class="res-sub"><span>Bônus</span><input type="number" name="system.pm.bonus" value="{{system.pm.bonus}}" class="res-tiny" /></div>
+      </div>
+
+      <div class="hdr-stats">
+        <div class="hdr-stat">
+          <span class="hs-val">{{system.defesa.total}}</span>
+          <span class="hs-lbl"><i class="fas fa-shield-halved"></i> DEF</span>
+        </div>
+        <div class="hdr-stat">
+          <input type="number" name="system.biografia.deslocamento" value="{{system.biografia.deslocamento}}" class="hs-input" />
+          <span class="hs-lbl"><i class="fas fa-person-running"></i> DESLOC</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- ═══════════ ABILITIES ═══════════ --}}
+  <section class="ab-row">
+    {{#each system.atributos as |atr key|}}
+    <div class="ab">
+      <span class="ab-lbl">{{upper key}}</span>
+      <div class="ab-mod roll-atributo" data-atributo="{{key}}" title="Rolar {{upper key}}">{{signedNum atr.total}}</div>
+      <input type="number" class="ab-val" name="system.atributos.{{key}}.value" value="{{atr.value}}" title="Modificador base" />
+    </div>
+    {{/each}}
+    <div class="ab ab--init">
+      <span class="ab-lbl">INIC.</span>
+      <div class="ab-mod ab-mod--red roll-iniciativa" title="Rolar Iniciativa">{{signedNum system.pericias.iniciativa.total}}</div>
+    </div>
+  </section>
+
+  {{!-- ═══════════ MAIN ═══════════ --}}
+  <section class="main">
+
+    {{!-- LEFT --}}
+    <aside class="col-l">
+      <div class="col-hdr"><i class="fas fa-feather-pointed"></i> PERÍCIAS</div>
+      <div class="sk-hdr">
+        <span class="skh-t"></span>
+        <span class="skh-nm">Perícia</span>
+        <span class="skh-at">Atr</span>
+        <span class="skh-bn">Bônus</span>
+        <span class="skh-tot">Total</span>
+      </div>
+      <div class="sk-scroll">
+        {{#each system.pericias as |p key|}}
+        <div class="sk {{#if p.treinada}}sk-t{{/if}}">
+          <label class="sk-dot-wrap">
+            <input type="checkbox" name="system.pericias.{{key}}.treinada" {{checked p.treinada}} />
+            <span class="sk-dot"></span>
+          </label>
+          <span class="sk-nm roll-pericia" data-pericia="{{key}}">{{capitalize key}}</span>
+          <span class="sk-at">{{upper p.atributo}}</span>
+          <input type="number" name="system.pericias.{{key}}.bonus" value="{{p.bonus}}" class="sk-bn" title="Bônus miscelâneo" />
+          <span class="sk-tot roll-pericia" data-pericia="{{key}}">{{signedNum p.total}}</span>
+        </div>
+        {{/each}}
+      </div>
+    </aside>
+
+    {{!-- CENTER --}}
+    <main class="col-c">
+      <nav class="sheet-tabs tabs c-tabs" data-group="primary">
+        <a class="item" data-tab="combate"><i class="fas fa-swords"></i> Combate</a>
+        <a class="item" data-tab="poderes"><i class="fas fa-bolt"></i> Poderes</a>
+        <a class="item" data-tab="magias"><i class="fas fa-hat-wizard"></i> Magias</a>
+        <a class="item" data-tab="inventario"><i class="fas fa-sack"></i> Inventário</a>
+        <a class="item" data-tab="bio"><i class="fas fa-scroll"></i> Notas</a>
+        {{#if isInventor}}<a class="item" data-tab="invencoes"><i class="fas fa-cog"></i> Invenções</a>{{/if}}
+        <a class="item" data-tab="condicoes"><i class="fas fa-exclamation-triangle"></i> Condições</a>
+      </nav>
+      <div class="sheet-body c-body">
+
+        {{!-- COMBATE --}}
+        <div class="tab combate" data-group="primary" data-tab="combate">
+          <div class="sec">
+            <i class="fas fa-swords s-i"></i>
+            <span class="s-t">Armas</span>
+            <button type="button" class="s-add item-create" data-type="arma"><i class="fas fa-plus"></i> Adicionar</button>
+          </div>
+          <div class="col-headers">
+            <span class="ch-nm">Nome</span><span class="ch-dt">Dano</span><span class="ch-dt">Crítico</span><span class="ch-dt">Tipo</span><span class="ch-ct"></span>
+          </div>
+          {{#each armas}}
+          <div class="irow item" data-item-id="{{this._id}}">
+            <a class="roll-arma i-roll" title="Rolar Ataque + Dano"><i class="fas fa-dice-d20"></i></a>
+            <span class="i-nm">{{this.name}}</span>
+            <span class="i-dt">{{this.system.dano}}</span>
+            <span class="i-dt">{{this.system.critico}}</span>
+            <span class="i-dt">{{this.system.tipo}}</span>
+            <span class="i-ct">
+              <a class="item-edit" title="Editar"><i class="fas fa-pen"></i></a>
+              <a class="item-delete" title="Excluir"><i class="fas fa-trash"></i></a>
+            </span>
+          </div>
+          {{else}}
+          <div class="empty-msg"><i class="fas fa-swords"></i> Nenhuma arma — arraste ou clique em Adicionar</div>
+          {{/each}}
+
+          <div class="sec mt">
+            <i class="fas fa-shield s-i"></i>
+            <span class="s-t">Armaduras</span>
+            <button type="button" class="s-add item-create" data-type="armadura"><i class="fas fa-plus"></i> Adicionar</button>
+          </div>
+          <div class="col-headers">
+            <span class="ch-nm">Nome</span><span class="ch-dt">Defesa</span><span class="ch-dt">Penalidade</span><span class="ch-dt">Tipo</span><span class="ch-ct"></span>
+          </div>
+          {{#each armaduras}}
+          <div class="irow item {{#if this.system.equipada}}item-equipped{{/if}}" data-item-id="{{this._id}}">
+            <a class="item-equip" title="{{#if this.system.equipada}}Desequipar{{else}}Equipar{{/if}}">
+              <i class="fas {{#if this.system.equipada}}fa-shield-halved equip-on{{else}}fa-shield equip-off{{/if}}"></i>
+            </a>
+            <span class="i-nm">{{this.name}}</span>
+            <span class="i-dt">+{{this.system.defesa}}</span>
+            <span class="i-dt">{{this.system.penalidade}}</span>
+            <span class="i-dt">{{this.system.tipo}}</span>
+            <span class="i-ct">
+              <a class="item-edit" title="Editar"><i class="fas fa-pen"></i></a>
+              <a class="item-delete" title="Excluir"><i class="fas fa-trash"></i></a>
+            </span>
+          </div>
+          {{else}}
+          <div class="empty-msg"><i class="fas fa-shield"></i> Nenhuma armadura adicionada</div>
+          {{/each}}
+        </div>
+
+        {{!-- PODERES --}}
+        <div class="tab poderes" data-group="primary" data-tab="poderes">
+          <div class="sec">
+            <i class="fas fa-bolt s-i"></i>
+            <span class="s-t">Poderes</span>
+            <button type="button" class="s-add item-create" data-type="poder"><i class="fas fa-plus"></i> Adicionar</button>
+          </div>
+          {{#each poderes}}
+          <div class="irow item" data-item-id="{{this._id}}">
+            <a class="i-roll item-use" title="Usar Magia"><i class="fas fa-hat-wizard"></i></a><span class="i-nm item-use" style="cursor:pointer">{{this.name}}</span>
+            {{#if this.system.custoPM}}<span class="tg tg-pm"><i class="fas fa-star"></i> {{this.system.custoPM}} PM</span>{{/if}}
+            {{#if this.system.tipo}}<span class="tg">{{this.system.tipo}}</span>{{/if}}
+            <span class="i-ct"><a class="item-edit"><i class="fas fa-pen"></i></a><a class="item-delete"><i class="fas fa-trash"></i></a></span>
+          </div>
+          {{else}}
+          <div class="empty-msg"><i class="fas fa-bolt"></i> Nenhum poder adicionado</div>
+          {{/each}}
+        </div>
+
+        {{!-- MAGIAS --}}
+        <div class="tab magias" data-group="primary" data-tab="magias">
+
+          <div class="circ-hdr"><span>1° Círculo</span><button type="button" class="circ-add item-create" data-type="magia" data-circle="1"><i class="fas fa-plus"></i></button></div>
+          {{#each magias1}}
+          <div class="irow item" data-item-id="{{this._id}}">
+            <a class="i-roll item-use" title="Usar Magia"><i class="fas fa-hat-wizard"></i></a><span class="i-nm item-use" style="cursor:pointer">{{this.name}}</span>
+            {{#if this.system.escola}}<span class="tg">{{this.system.escola}}</span>{{/if}}
+            <span class="i-ct"><a class="item-edit"><i class="fas fa-pen"></i></a><a class="item-delete"><i class="fas fa-trash"></i></a></span>
+          </div>
+          {{/each}}
+
+          <div class="circ-hdr"><span>2° Círculo</span><button type="button" class="circ-add item-create" data-type="magia" data-circle="2"><i class="fas fa-plus"></i></button></div>
+          {{#each magias2}}
+          <div class="irow item" data-item-id="{{this._id}}">
+            <a class="i-roll item-use" title="Usar Magia"><i class="fas fa-hat-wizard"></i></a><span class="i-nm item-use" style="cursor:pointer">{{this.name}}</span>
+            {{#if this.system.escola}}<span class="tg">{{this.system.escola}}</span>{{/if}}
+            <span class="i-ct"><a class="item-edit"><i class="fas fa-pen"></i></a><a class="item-delete"><i class="fas fa-trash"></i></a></span>
+          </div>
+          {{/each}}
+
+          <div class="circ-hdr"><span>3° Círculo</span><button type="button" class="circ-add item-create" data-type="magia" data-circle="3"><i class="fas fa-plus"></i></button></div>
+          {{#each magias3}}
+          <div class="irow item" data-item-id="{{this._id}}">
+            <a class="i-roll item-use" title="Usar Magia"><i class="fas fa-hat-wizard"></i></a><span class="i-nm item-use" style="cursor:pointer">{{this.name}}</span>
+            {{#if this.system.escola}}<span class="tg">{{this.system.escola}}</span>{{/if}}
+            <span class="i-ct"><a class="item-edit"><i class="fas fa-pen"></i></a><a class="item-delete"><i class="fas fa-trash"></i></a></span>
+          </div>
+          {{/each}}
+
+          <div class="circ-hdr"><span>4° Círculo</span><button type="button" class="circ-add item-create" data-type="magia" data-circle="4"><i class="fas fa-plus"></i></button></div>
+          {{#each magias4}}
+          <div class="irow item" data-item-id="{{this._id}}">
+            <a class="i-roll item-use" title="Usar Magia"><i class="fas fa-hat-wizard"></i></a><span class="i-nm item-use" style="cursor:pointer">{{this.name}}</span>
+            {{#if this.system.escola}}<span class="tg">{{this.system.escola}}</span>{{/if}}
+            <span class="i-ct"><a class="item-edit"><i class="fas fa-pen"></i></a><a class="item-delete"><i class="fas fa-trash"></i></a></span>
+          </div>
+          {{/each}}
+
+          <div class="circ-hdr"><span>5° Círculo</span><button type="button" class="circ-add item-create" data-type="magia" data-circle="5"><i class="fas fa-plus"></i></button></div>
+          {{#each magias5}}
+          <div class="irow item" data-item-id="{{this._id}}">
+            <a class="i-roll item-use" title="Usar Magia"><i class="fas fa-hat-wizard"></i></a><span class="i-nm item-use" style="cursor:pointer">{{this.name}}</span>
+            {{#if this.system.escola}}<span class="tg">{{this.system.escola}}</span>{{/if}}
+            <span class="i-ct"><a class="item-edit"><i class="fas fa-pen"></i></a><a class="item-delete"><i class="fas fa-trash"></i></a></span>
+          </div>
+          {{/each}}
+
+        </div>
+
+        {{!-- INVENTÁRIO --}}
+        <div class="tab inventario" data-group="primary" data-tab="inventario">
+          <div class="purse">
+            <div class="p-coin"><div class="p-badge p-tb">T$</div><input type="number" name="system.detalhes.dinheiro.tb" value="{{system.detalhes.dinheiro.tb}}" /></div>
+            <div class="p-coin"><div class="p-badge p-to">TO</div><input type="number" name="system.detalhes.dinheiro.to" value="{{system.detalhes.dinheiro.to}}" /></div>
+          </div>
+          <div class="sec">
+            <i class="fas fa-sack s-i"></i>
+            <span class="s-t">Equipamentos</span>
+            <button type="button" class="s-add item-create" data-type="equipamento"><i class="fas fa-plus"></i> Adicionar</button>
+          </div>
+          {{#each equipamentos}}
+          <div class="irow item" data-item-id="{{this._id}}">
+            <span class="i-nm">{{this.name}}</span>
+            <span class="i-dt">x{{this.system.quantidade}}</span>
+            <span class="i-dt">{{this.system.peso}} kg</span>
+            <span class="i-ct"><a class="item-edit"><i class="fas fa-pen"></i></a><a class="item-delete"><i class="fas fa-trash"></i></a></span>
+          </div>
+          {{else}}
+          <div class="empty-msg"><i class="fas fa-sack"></i> Nenhum equipamento</div>
+          {{/each}}
+        </div>
+
+        {{!-- BIO --}}
+        <div class="tab bio" data-group="primary" data-tab="bio">
+          {{editor system.biografia.descricao target="system.biografia.descricao" button=true editable=true}}
+        </div>
+
+        {{!-- INVENÇÕES (só para Inventores) --}}
+        {{#if isInventor}}
+        <div class="tab invencoes" data-group="primary" data-tab="invencoes">
+          <div class="sec">
+            <i class="fas fa-cog s-i"></i>
+            <span class="s-t">Engenhocas</span>
+            <button type="button" class="s-add item-create" data-type="invencao"><i class="fas fa-plus"></i> Nova Engenhoca</button>
+            <button type="button" class="invencao-reset" style="margin-left:auto;font-size:11px;padding:2px 8px;background:#353535;border:1px solid #555;color:#c7a16b;border-radius:3px;cursor:pointer" title="Resetar todas as ativações do dia"><i class="fas fa-redo"></i> Novo Dia</button>
+          </div>
+          <div class="inv-info" style="font-size:11px;color:#888;padding:2px 6px;margin-bottom:4px">
+            Limite: Inteligência ({{system.atributos.int.total}}) engenhocas. Ativação: Ofício (engenhoqueiro) vs CD.
+          </div>
+          <div class="col-headers">
+            <span class="ch-nm">Nome</span><span class="ch-dt" style="min-width:80px">PV</span><span class="ch-dt">Magia</span><span class="ch-dt">CD</span><span class="ch-dt">Status</span><span class="ch-ct"></span>
+          </div>
+          {{#each invencoes}}
+          <div class="irow item {{#if (eq this.system.status 'enguicada')}}inv-broken{{/if}}" data-item-id="{{this._id}}">
+            <a class="i-roll invencao-activate" title="Ativar Engenhoca"><i class="fas fa-cog"></i></a>
+            <span class="i-nm invencao-details" style="cursor:pointer" title="Clique para ver detalhes">{{this.name}}</span>
+            <span class="i-dt inv-pv-cell" style="min-width:80px">
+              <div class="inv-pv-wrap">
+                <input type="number" class="inv-pv-input invencao-pv" value="{{this.system.pvAtual}}" data-field="system.pvAtual" min="0" title="PV Atual" />
+                <span class="inv-pv-sep">/</span>
+                <span class="inv-pv-max">{{this.system.pvMax}}</span>
+              </div>
+              <div class="inv-pv-bar"><div class="inv-pv-fill" style="width:{{#if this.system.pvMax}}{{math this.system.pvAtual '/' this.system.pvMax '*' 100}}%{{else}}0%{{/if}}"></div></div>
+            </span>
+            <span class="i-dt" style="font-size:11px">{{this.system.magiaSim}}</span>
+            <span class="i-dt">{{this.system.cdAtivacao}}</span>
+            <span class="i-dt">
+              {{#if (eq this.system.status "funcional")}}<span style="color:#4caf50">✓</span>{{else}}<span style="color:#f44336">✗</span>{{/if}}
+            </span>
+            <span class="i-ct">
+              {{#if (eq this.system.status "enguicada")}}<a class="invencao-repair" title="Consertar (1h de trabalho)"><i class="fas fa-wrench" style="color:#ff9800"></i></a>{{/if}}
+              <a class="item-edit" title="Editar"><i class="fas fa-pen"></i></a>
+              <a class="item-delete" title="Excluir"><i class="fas fa-trash"></i></a>
+            </span>
+          </div>
+          {{else}}
+          <div class="empty-msg"><i class="fas fa-cog"></i> Nenhuma engenhoca — crie uma com o botão acima</div>
+          {{/each}}
+        </div>
+        {{/if}}
+
+        {{!-- CONDIÇÕES & MODIFICADORES GLOBAIS --}}
+        <div class="tab condicoes" data-group="primary" data-tab="condicoes">
+          <div class="sec"><i class="fas fa-sliders-h s-i"></i><span class="s-t">Modificadores Globais</span></div>
+          <div class="gmod-grid">
+            <div class="gmod"><label>Rolagem</label><input type="number" name="system.global.rolagem" value="{{system.global.rolagem}}" /></div>
+            <div class="gmod"><label>Ataque</label><input type="number" name="system.global.ataque" value="{{system.global.ataque}}" /></div>
+            <div class="gmod"><label>Perícias</label><input type="number" name="system.global.pericias" value="{{system.global.pericias}}" /></div>
+            <div class="gmod"><label>Resistências</label><input type="number" name="system.global.resistencias" value="{{system.global.resistencias}}" /></div>
+            <div class="gmod"><label>Dano</label><input type="number" name="system.global.dano" value="{{system.global.dano}}" /></div>
+          </div>
+
+          <div class="sec mt"><i class="fas fa-exclamation-triangle s-i"></i><span class="s-t">Condições</span></div>
+          <div class="cond-grid">
+            <label class="cond" title="–2 em testes de perícia. Se ficar abalado novamente, fica apavorado. Medo."><input type="checkbox" name="system.condicoes.abalado" {{checked system.condicoes.abalado}} /><span>Abalado</span></label>
+            <label class="cond" title="Desprevenido e imóvel, –2 ataque, só armas leves. Movimento."><input type="checkbox" name="system.condicoes.agarrado" {{checked system.condicoes.agarrado}} /><span>Agarrado</span></label>
+            <label class="cond" title="Custo de PM das habilidades aumenta em +1. Mental."><input type="checkbox" name="system.condicoes.alquebrado" {{checked system.condicoes.alquebrado}} /><span>Alquebrado</span></label>
+            <label class="cond" title="–5 em testes de perícia, não pode se aproximar da fonte do medo. Medo."><input type="checkbox" name="system.condicoes.apavorado" {{checked system.condicoes.apavorado}} /><span>Apavorado</span></label>
+            <label class="cond" title="Desprevenido e não pode fazer ações. Mental."><input type="checkbox" name="system.condicoes.atordoado" {{checked system.condicoes.atordoado}} /><span>Atordoado</span></label>
+            <label class="cond" title="–5 ataque corpo a corpo, desloc 1,5m, –5 Defesa corpo a corpo, +5 Defesa distância."><input type="checkbox" name="system.condicoes.caido" {{checked system.condicoes.caido}} /><span>Caído</span></label>
+            <label class="cond" title="Desprevenido e lento, –5 Percepção e perícias de For/Des. Sentidos."><input type="checkbox" name="system.condicoes.cego" {{checked system.condicoes.cego}} /><span>Cego</span></label>
+            <label class="cond" title="Comportamento aleatório (1d6). Mental."><input type="checkbox" name="system.condicoes.confuso" {{checked system.condicoes.confuso}} /><span>Confuso</span></label>
+            <label class="cond" title="–5 em For, Des, Con e perícias baseadas. Se repetir, fica inconsciente."><input type="checkbox" name="system.condicoes.debilitado" {{checked system.condicoes.debilitado}} /><span>Debilitado</span></label>
+            <label class="cond" title="–5 Defesa e Reflexos contra inimigos que não possa perceber."><input type="checkbox" name="system.condicoes.desprevenido" {{checked system.condicoes.desprevenido}} /><span>Desprevenido</span></label>
+            <label class="cond" title="Sob efeito de uma doença. Metabolismo."><input type="checkbox" name="system.condicoes.doente" {{checked system.condicoes.doente}} /><span>Doente</span></label>
+            <label class="cond" title="1d6 dano de fogo no início dos turnos. Ação padrão para apagar."><input type="checkbox" name="system.condicoes.emChamas" {{checked system.condicoes.emChamas}} /><span>Em Chamas</span></label>
+            <label class="cond" title="Não está sob controle, mas percebe a fonte favoravelmente. Mental."><input type="checkbox" name="system.condicoes.enfeiticado" {{checked system.condicoes.enfeiticado}} /><span>Enfeitiçado</span></label>
+            <label class="cond" title="Só pode fazer ação padrão ou de movimento (não ambas). Metabolismo."><input type="checkbox" name="system.condicoes.enjoado" {{checked system.condicoes.enjoado}} /><span>Enjoado</span></label>
+            <label class="cond" title="Lento, vulnerável, –2 em ataque. Movimento."><input type="checkbox" name="system.condicoes.enredado" {{checked system.condicoes.enredado}} /><span>Enredado</span></label>
+            <label class="cond" title="Efeito varia conforme o veneno. Veneno."><input type="checkbox" name="system.condicoes.envenenado" {{checked system.condicoes.envenenado}} /><span>Envenenado</span></label>
+            <label class="cond" title="–5 em Int, Sab, Car e perícias baseadas. Se repetir, fica inconsciente. Mental."><input type="checkbox" name="system.condicoes.esmorecido" {{checked system.condicoes.esmorecido}} /><span>Esmorecido</span></label>
+            <label class="cond" title="Debilitado, lento e vulnerável. Se repetir, fica inconsciente. Cansaço."><input type="checkbox" name="system.condicoes.exausto" {{checked system.condicoes.exausto}} /><span>Exausto</span></label>
+            <label class="cond" title="–5 Percepção, não faz ações exceto observar. Mental."><input type="checkbox" name="system.condicoes.fascinado" {{checked system.condicoes.fascinado}} /><span>Fascinado</span></label>
+            <label class="cond" title="Fraco e vulnerável. Se repetir, fica exausto. Cansaço."><input type="checkbox" name="system.condicoes.fatigado" {{checked system.condicoes.fatigado}} /><span>Fatigado</span></label>
+            <label class="cond" title="–2 em For, Des, Con e perícias. Se repetir, fica debilitado."><input type="checkbox" name="system.condicoes.fraco" {{checked system.condicoes.fraco}} /><span>Fraco</span></label>
+            <label class="cond" title="–2 em Int, Sab, Car e perícias. Se repetir, fica esmorecido. Mental."><input type="checkbox" name="system.condicoes.frustrado" {{checked system.condicoes.frustrado}} /><span>Frustrado</span></label>
+            <label class="cond" title="Deslocamento 0m. Movimento."><input type="checkbox" name="system.condicoes.imovel" {{checked system.condicoes.imovel}} /><span>Imóvel</span></label>
+            <label class="cond" title="Indefeso, não faz ações. Balançar para acordar custa ação padrão."><input type="checkbox" name="system.condicoes.inconsciente" {{checked system.condicoes.inconsciente}} /><span>Inconsciente</span></label>
+            <label class="cond" title="Desprevenido, –10 Defesa, falha Reflexos. Pode sofrer golpe de misericórdia."><input type="checkbox" name="system.condicoes.indefeso" {{checked system.condicoes.indefeso}} /><span>Indefeso</span></label>
+            <label class="cond" title="Deslocamento pela metade, não pode correr ou fazer investidas. Movimento."><input type="checkbox" name="system.condicoes.lento" {{checked system.condicoes.lento}} /><span>Lento</span></label>
+            <label class="cond" title="–2 em ataque e Percepção. Sentidos."><input type="checkbox" name="system.condicoes.ofuscado" {{checked system.condicoes.ofuscado}} /><span>Ofuscado</span></label>
+            <label class="cond" title="Imóvel e indefeso, só ações mentais. Movimento."><input type="checkbox" name="system.condicoes.paralizado" {{checked system.condicoes.paralizado}} /><span>Paralizado</span></label>
+            <label class="cond" title="Não pode fazer ações. Mental."><input type="checkbox" name="system.condicoes.pasmo" {{checked system.condicoes.pasmo}} /><span>Pasmo</span></label>
+            <label class="cond" title="Inconsciente, RD 8. Metamorfose."><input type="checkbox" name="system.condicoes.petrificacao" {{checked system.condicoes.petrificacao}} /><span>Petrificação</span></label>
+            <label class="cond" title="Teste de Con CD 15 no início do turno. Falha: perde 1d6 PV. Metabolismo."><input type="checkbox" name="system.condicoes.sangrando" {{checked system.condicoes.sangrando}} /><span>Sangrando</span></label>
+            <label class="cond" title="Não faz testes de Percepção auditiva, –5 Iniciativa. Sentidos."><input type="checkbox" name="system.condicoes.surdo" {{checked system.condicoes.surdo}} /><span>Surdo</span></label>
+            <label class="cond" title="Desprevenido, não pode fazer ações."><input type="checkbox" name="system.condicoes.surpreendido" {{checked system.condicoes.surpreendido}} /><span>Surpreendido</span></label>
+            <label class="cond" title="–2 na Defesa."><input type="checkbox" name="system.condicoes.vulneravel" {{checked system.condicoes.vulneravel}} /><span>Vulnerável</span></label>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    {{!-- RIGHT --}}
+    <aside class="col-r">
+      <div class="col-hdr"><i class="fas fa-shield-halved"></i> DEFESA</div>
+      <div class="sb">
+        <div class="sb-f"><label>Base</label><input type="number" name="system.defesa.base" value="{{system.defesa.base}}" /></div>
+        <div class="sb-f"><label>Armadura</label><span class="sb-auto">+{{system.defesa.armadura}}</span></div>
+        <div class="sb-f"><label>Escudo</label><span class="sb-auto">+{{system.defesa.escudo}}</span></div>
+        <div class="sb-f"><label>Outros</label><input type="number" name="system.defesa.outros" value="{{system.defesa.outros}}" /></div>
+      </div>
+      <div class="col-hdr"><i class="fas fa-shield"></i> RESISTÊNCIAS</div>
+      <div class="sb">
+        <div class="sb-r roll-pericia" data-pericia="fortitude"><span class="sbr-n">Fortitude</span><span class="sbr-a">CON</span><span class="sbr-v">{{signedNum system.pericias.fortitude.total}}</span></div>
+        <div class="sb-r roll-pericia" data-pericia="reflexos"><span class="sbr-n">Reflexos</span><span class="sbr-a">DES</span><span class="sbr-v">{{signedNum system.pericias.reflexos.total}}</span></div>
+        <div class="sb-r roll-pericia" data-pericia="vontade"><span class="sbr-n">Vontade</span><span class="sbr-a">SAB</span><span class="sbr-v">{{signedNum system.pericias.vontade.total}}</span></div>
+      </div>
+      <div class="sb">
+        {{#if system._resistAuto}}<div class="sb-res-auto" title="Resistências raciais">{{system._resistAuto}}</div>{{/if}}
+        <div class="sb-res-tags">
+          {{#each system.resistenciasList}}
+          <span class="sb-res-tag">{{this}}<a class="res-remove" data-idx="{{@index}}" title="Remover">×</a></span>
+          {{/each}}
+        </div>
+        <button type="button" class="sb-res-add"><i class="fas fa-plus"></i> Resistência</button>
+      </div>
+      <div class="col-hdr"><i class="fas fa-star"></i> XP</div>
+      <div class="sb">
+        <div class="sb-f"><label>Total</label><input type="number" name="system.detalhes.xp" value="{{system.detalhes.xp}}" /></div>
+      </div>
+      <div class="col-hdr"><i class="fas fa-hat-wizard"></i> MAGIA</div>
+      <div class="sb">
+        <div class="sb-cd-block">
+          <span class="sb-cd-label">CD de Magia</span>
+          <span class="sb-cd-val">{{system._cdMagia}}</span>
+        </div>
+        <div class="sb-f sb-f--stack"><label>Atr. Chave</label>
+          <select name="system.magia.atributoChave" class="sb-select">
+            <option value="int" {{#if (eq system.magia.atributoChave "int")}}selected{{/if}}>Inteligência</option>
+            <option value="sab" {{#if (eq system.magia.atributoChave "sab")}}selected{{/if}}>Sabedoria</option>
+            <option value="car" {{#if (eq system.magia.atributoChave "car")}}selected{{/if}}>Carisma</option>
+          </select>
+        </div>
+        <div class="sb-f"><label>Bônus CD</label><input type="number" name="system.bonusCD" value="{{system.bonusCD}}" title="Bônus manual na CD" /></div>
+        {{#if system._bonusCDItens}}<div class="sb-note">+{{system._bonusCDItens}} de itens</div>{{/if}}
+        <div class="sb-cd-formula">{{system._cdFormula}}</div>
+      </div>
+    </aside>
+  </section>
+</form>

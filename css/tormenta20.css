@@ -1,0 +1,2489 @@
+/* ═══════════════════════════════════
+   TORMENTA 20 — FULL SIZE
+   ═══════════════════════════════════ */
+:root{
+  --bg0:#0c0c0c;--bg1:#171717;--bg2:#1f1f1f;--bg3:#353535;
+  --bgH:rgba(53,53,53,.55);--bgI:rgba(0,0,0,.45);--bgAlt:rgba(255,255,255,.018);
+  --R:#a82020;--Rb:#d72f2f;--Rl:#e16363;--Rd:#651313;--Rdd:#430d0d;
+  --G:#c7a16b;--Gl:#cdaa7a;--Gb:#ffdd99;--Gd:#816e54;--Gdd:#675946;
+  --Gglow:0 0 6px rgba(199,161,107,.35);
+  --T:#e6e6e6;--T2:#b8b8b8;--T3:#a1a1a1;--T4:#7b7b7b;--T5:#5c5c5c;--Tv:#9a957b;
+  --HP:#1aad5c;--MP:#54b8ec;
+  --B:#555;--Bd:rgba(92,92,92,.25);
+  --r:4px;--r2:8px;
+}
+
+/* ─ Base ─ */
+.tormenta20.sheet .window-content{background:var(--bg0);color:var(--T);padding:0;font-family:"Signika",system-ui,sans-serif;font-size:14px}
+.t20-sheet{display:flex;flex-direction:column;height:100%;overflow:hidden}
+.t20-sheet input[type="text"],.t20-sheet input[type="number"]{
+  background:var(--bgI);border:1px solid var(--B);border-radius:var(--r);
+  color:var(--T);padding:5px 7px;font-family:inherit;font-size:.9rem;transition:border-color .15s;
+}
+.t20-sheet input:hover:not(:disabled){border-color:var(--Rl)}
+.t20-sheet input:focus{outline:none;border-color:var(--Rl);box-shadow:0 0 0 2px rgba(225,99,99,.18)}
+.t20-sheet input[type="number"]{-moz-appearance:textfield;text-align:center}
+.t20-sheet input::-webkit-inner-spin-button{-webkit-appearance:none}
+
+/* ═══════ HEADER ═══════ */
+.sheet-header{display:flex;gap:12px;padding:12px 16px;background:var(--bg1);border-bottom:2px solid var(--Gd);flex-shrink:0}
+.hdr-row1{display:flex;align-items:center;gap:12px;width:100%}
+
+.hdr-portrait{position:relative;flex-shrink:0}
+.profile-img{width:110px;height:110px;border-radius:var(--r2);border:3px solid var(--Gd);object-fit:cover;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+.hdr-badge{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);background:var(--R);color:#fff;font-size:.75rem;font-weight:800;padding:2px 12px;border-radius:10px;border:2px solid var(--bg1)}
+.hdr-pdf-import{position:absolute;top:-6px;right:-6px;width:26px;height:26px;padding:0;background:var(--bg2);color:var(--G);border:1px solid var(--Gd);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;z-index:2}
+.hdr-pdf-import:hover{background:var(--R);color:#fff;border-color:var(--Rb);box-shadow:var(--Gglow)}
+.hdr-pdf-import:active{transform:scale(.92)}
+
+/* ─ Actor Directory: Botão "Importar Ficha PDF" ─ */
+.t20-pdf-import-btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  width:100%;margin:4px 0 6px;padding:6px 10px;
+  background:var(--bg2);color:var(--G);
+  border:1px solid var(--Gd);border-radius:var(--r);
+  cursor:pointer;font-size:.8rem;font-weight:600;
+  transition:all .15s;
+}
+.t20-pdf-import-btn:hover{background:var(--R);color:#fff;border-color:var(--Rb);box-shadow:var(--Gglow)}
+.t20-pdf-import-btn i{font-size:.9rem}
+
+.hdr-center{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.hdr-name{font-size:1.15rem;font-weight:700;background:none;border:none;border-bottom:1px solid transparent;padding:0 0 3px;width:100%;color:var(--T);font-family:inherit}
+.hdr-name:focus{border-bottom-color:var(--G);box-shadow:none}
+.hdr-meta{display:flex;gap:6px;flex-wrap:wrap}
+.hm{display:flex;flex-direction:column;flex:1;min-width:60px}
+.hm--xs{max-width:48px;flex:0 0 48px}
+.hm--classe{flex:1.8}
+.hm--classe input{text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.hm label{font-size:.6rem;text-transform:uppercase;letter-spacing:.8px;color:var(--T3);font-weight:700;margin-bottom:1px}
+.hm input{font-size:.8rem;padding:3px 5px}
+
+/* Resources */
+.hdr-res{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px 16px;background:var(--bg2);border:1px solid var(--Gdd);border-radius:var(--r2);min-width:145px}
+.res-label{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;display:flex;align-items:center;gap:5px}
+.res-label i{font-size:.6rem}
+.hdr-pv .res-label{color:var(--HP)} .hdr-pm .res-label{color:var(--MP)}
+.res-nums{display:flex;align-items:baseline;justify-content:center;gap:3px}
+.res-cur{width:52px;font-size:1.5rem;font-weight:800;padding:4px}
+.res-max{width:52px;font-size:1.5rem;font-weight:800;padding:4px;background:none;border-color:transparent;color:var(--T3)}
+.res-nums span{color:var(--T5);font-weight:300;font-size:1.3rem}
+.res-bar{width:100%;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.res-fill{height:100%;border-radius:3px;transition:width .4s}
+.pv-fill{background:linear-gradient(90deg,#0d5c2d,var(--HP))} .pm-fill{background:linear-gradient(90deg,#1a4d6e,var(--MP))}
+.res-sub{display:flex;align-items:center;gap:5px}
+.res-sub span{font-size:.6rem;color:var(--T5);text-transform:uppercase}
+.res-tiny{width:36px;font-size:.8rem;padding:3px 4px}
+
+/* Stat boxes */
+.hdr-stats{display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.hdr-stat{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--Gdd);border-radius:var(--r2);padding:5px 10px}
+.hs-val{font-size:1.5rem;font-weight:900;color:var(--T);min-width:34px;text-align:center}
+.hs-input{width:40px;font-size:1.1rem;font-weight:800;padding:3px}
+.hs-lbl{font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--T4);display:flex;align-items:center;gap:3px}
+.hs-lbl i{color:var(--G);font-size:.55rem}
+
+/* ═══════ ABILITIES ═══════ */
+.ab-row{display:flex;background:var(--bg1);border-bottom:1px solid var(--Gdd);padding:10px 14px;flex-shrink:0;gap:0}
+.ab{flex:1;display:flex;flex-direction:column;align-items:center;padding:5px 0;border-right:1px solid var(--Bd)}
+.ab:last-child{border-right:none}
+.ab-lbl{font-size:.6rem;font-weight:800;letter-spacing:1.5px;color:var(--G);margin-bottom:2px}
+.ab-mod{
+  font-size:1.5rem;font-weight:900;color:var(--T);cursor:pointer;
+  padding:2px 12px;border-radius:var(--r);border:1px solid transparent;
+  transition:all .12s;line-height:1.2;
+}
+.ab-mod:hover{color:var(--Rl);border-color:var(--Rb);box-shadow:inset 0 0 5px var(--Rb)}
+.ab-val{width:36px;font-size:.72rem;font-weight:600;padding:2px;color:var(--T4);background:rgba(0,0,0,.3);border:1px solid var(--Bd);border-radius:var(--r);margin-top:2px}
+.ab--init{border-left:2px solid var(--G);padding-left:10px;border-right:none;min-width:68px}
+.ab-mod--red{background:var(--Rd);color:#fff;padding:4px 14px;font-size:1.4rem;border-radius:var(--r2)}
+.ab-mod--red:hover{background:var(--R);border-color:transparent;box-shadow:none}
+
+/* ═══════ 3-COL ═══════ */
+.main{display:flex;flex:1;overflow:hidden;min-height:0}
+.col-l{width:280px;min-width:280px;background:var(--bg1);border-right:1px solid var(--Bd);display:flex;flex-direction:column}
+.col-c{flex:1;display:flex;flex-direction:column;min-width:0}
+.col-r{width:200px;min-width:200px;background:var(--bg1);border-left:1px solid var(--Bd);overflow-y:auto}
+
+.col-hdr{
+  padding:0 12px;border-bottom:2px solid var(--Gdd);
+  font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;
+  color:var(--G);text-shadow:var(--Gglow);
+  height:40px;display:flex;align-items:center;box-sizing:border-box;flex-shrink:0;
+}
+.col-hdr i{margin-right:5px;font-size:.62rem}
+
+/* ═══════ SKILLS ═══════ */
+.sk-hdr{
+  display:grid;grid-template-columns:22px 1fr 30px 44px 46px;
+  gap:4px;padding:5px 10px 4px;
+  border-bottom:1px solid var(--Bd);
+  font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--T5);
+}
+.skh-bn,.skh-tot,.skh-at{text-align:center}
+
+.sk-scroll{flex:1;overflow-y:auto;padding:0 5px 8px}
+
+.sk{
+  display:grid;grid-template-columns:22px 1fr 30px 44px 46px;
+  align-items:center;gap:4px;
+  padding:5px 5px;
+  border-left:3px solid transparent;
+  transition:background .1s;
+}
+.sk:nth-child(odd){background:var(--bgAlt)}
+.sk:hover{background:var(--bgH)}
+.sk-t{border-left-color:var(--R)}
+
+/* Proficiency dot */
+.sk-dot-wrap{display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sk-dot-wrap input{position:absolute;opacity:0;width:0;height:0}
+.sk-dot{
+  width:13px;height:13px;border-radius:50%;
+  border:2px solid var(--T5);background:var(--bg2);transition:all .12s;
+}
+.sk-dot-wrap input:checked + .sk-dot{background:var(--R);border-color:var(--R);box-shadow:0 0 5px rgba(168,32,32,.5)}
+
+.sk-nm{font-size:.88rem;font-weight:600;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sk-nm:hover{color:var(--Rl)}
+.sk-at{font-size:.58rem;font-weight:700;color:var(--T5);text-align:center;letter-spacing:.3px}
+
+.sk-bn{
+  width:100%;font-size:.85rem;font-weight:700;padding:3px 2px;
+  background:var(--bg3);border:1px solid var(--B);border-radius:var(--r);
+  color:var(--Gb);text-align:center;transition:all .12s;
+}
+.sk-bn:hover{border-color:var(--Gl)}
+.sk-bn:focus{border-color:var(--Rl);background:var(--bgI);color:var(--T)}
+
+.sk-tot{
+  font-size:1.05rem;font-weight:800;color:var(--T);
+  text-align:center;cursor:pointer;
+  padding:3px 0;border-radius:var(--r);transition:all .12s;
+}
+.sk-tot:hover{color:var(--Rl);background:rgba(215,47,47,.08);box-shadow:inset 0 0 3px var(--Rb)}
+
+/* ═══════ CENTER TABS ═══════ */
+.c-tabs{display:flex;background:var(--bg1);border:none;border-bottom:2px solid var(--Gdd);padding:0;margin:0;flex-shrink:0;height:40px;align-items:stretch;box-sizing:border-box}
+.c-tabs .item{
+  padding:0 16px;font-size:.75rem;font-weight:700;letter-spacing:.6px;
+  color:var(--T2);text-decoration:none;border:none;border-bottom:2px solid transparent;transition:all .12s;cursor:pointer;
+  display:flex;align-items:center;box-sizing:border-box;margin:0;
+}
+.c-tabs .item i{margin-right:4px;font-size:.65rem}
+.c-tabs .item:hover{color:var(--T);background:rgba(255,255,255,.03)}
+.c-tabs .item.active{color:#fff;background:var(--R);border-bottom-color:var(--Rb)}
+
+.c-body{flex:1;overflow-y:auto;padding:0}
+.c-body .tab{display:none; padding:0 10px} .c-body .tab.active{display:block}
+
+/* Section headers */
+.sec{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;margin:0;
+  background:var(--bg1);
+  border-bottom:2px solid var(--Gdd);
+  border-top:1px solid rgba(255,255,255,.04);
+}
+.sec.mt{margin-top:0;border-top:2px solid var(--Gdd)}
+.s-i{color:var(--Rl);font-size:.75rem}
+.s-t{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--Rl);flex:1}
+.s-add{
+  background:var(--bg3);border:1px solid var(--Bd);color:var(--T3);
+  cursor:pointer;font-size:.7rem;font-weight:600;font-family:inherit;
+  padding:4px 12px;border-radius:var(--r);transition:all .12s;
+  display:flex;align-items:center;gap:4px;
+}
+.s-add i{font-size:.6rem}
+.s-add:hover{color:#fff;border-color:var(--Rl);background:var(--R)}
+
+/* Column headers row */
+.col-headers{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 8px;
+  background:rgba(0,0,0,.3);
+  border-bottom:1px solid var(--Bd);
+  font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--T5);
+}
+.ch-nm{flex:1}
+.ch-dt{min-width:55px;text-align:center}
+.ch-ct{width:50px}
+
+/* Item rows */
+.irow{display:flex;align-items:center;gap:8px;padding:8px 8px;border-bottom:1px solid rgba(255,255,255,.04);transition:all .1s}
+.irow:nth-child(even){background:var(--bgAlt)}
+.irow:hover{background:var(--bgH);box-shadow:inset 0 0 3px var(--Rb)}
+.i-nm{flex:1;font-weight:600;font-size:.92rem}
+.i-dt{font-size:.82rem;color:var(--T3);min-width:55px;text-align:center}
+.i-ct{display:flex;gap:8px}
+.i-ct a{color:var(--T5);cursor:pointer;font-size:.75rem;opacity:0;transition:all .12s}
+.irow:hover .i-ct a{opacity:1}
+.i-ct a:hover{color:var(--Rl)}
+
+/* Empty state */
+.empty-msg{
+  text-align:center;padding:24px 14px;
+  color:var(--T5);font-size:.82rem;font-style:italic;
+  border:1px dashed var(--Bd);border-radius:var(--r2);margin:10px;
+}
+.empty-msg i{margin-right:5px;font-size:.7rem}
+
+/* Tags */
+.tg{font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:10px;background:rgba(0,0,0,.35);color:var(--T3);border:1px solid var(--Bd);white-space:nowrap}
+.tg i{margin-right:3px;font-size:.55rem}
+.tg-pm{color:var(--MP);border-color:rgba(84,184,236,.15)}
+.tg-circ{color:var(--Gb);border-color:rgba(199,161,107,.15)}
+
+/* ═══════ PURSE ═══════ */
+.purse{display:flex;gap:8px;margin:10px 10px 0}
+.p-coin{flex:1;display:flex;align-items:center;gap:8px;background:var(--bg2);border-radius:var(--r2);padding:7px 9px}
+.p-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:900;flex-shrink:0}
+.p-tc{background:#7a4e2d;color:#f5dfc3} .p-tp{background:#5a5e66;color:#dfe1e5} .p-to{background:var(--G);color:#2c1a00}
+.p-coin input{flex:1;font-weight:700;font-size:.95rem}
+
+/* ═══════ RIGHT SIDEBAR ═══════ */
+.sb{padding:6px 12px 10px}
+.sb-f{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.sb-f label{font-size:.82rem;color:var(--T3);font-weight:600}
+.sb-f input{width:46px;font-weight:700;font-size:.92rem;padding:3px}
+
+.sb-r{display:flex;align-items:center;gap:6px;padding:8px 0;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04);transition:all .12s}
+.sb-r:hover{box-shadow:inset 0 0 3px var(--Rb)}
+.sbr-n{flex:1;font-size:.88rem;font-weight:600}
+.sbr-a{font-size:.58rem;font-weight:700;color:var(--T5)}
+.sbr-v{font-size:1rem;font-weight:800;min-width:30px;text-align:right}
+
+/* ═══════ EDITOR ═══════ */
+.t20-sheet .editor-content{background:var(--bg2);border:1px solid var(--B);border-radius:var(--r);padding:12px;min-height:280px;color:var(--T);margin:10px}
+
+/* ProseMirror dark theme */
+.t20-sheet .editor {
+  display:flex; flex-direction:column; height:100%; min-height:320px;
+}
+.t20-sheet .editor .editor-content {
+  flex:1; overflow-y:auto; margin:0 10px 10px;
+}
+/* Toolbar */
+.t20-sheet .editor-menu,
+.t20-sheet .editor .ProseMirror-menubar,
+.t20-sheet .prosemirror menu {
+  background:var(--bg3) !important; border-bottom:1px solid var(--B) !important;
+  padding:4px 6px !important;
+}
+/* Invert all toolbar icons/buttons/elements */
+.t20-sheet .editor-menu *,
+.t20-sheet .editor .ProseMirror-menubar *,
+.t20-sheet .prosemirror menu * {
+  filter:invert(1) brightness(0.85);
+}
+/* Prevent double-invert on nested elements */
+.t20-sheet .editor-menu * *,
+.t20-sheet .editor .ProseMirror-menubar * * {
+  filter:none;
+}
+.t20-sheet .editor-menu button:hover,
+.t20-sheet .editor .ProseMirror-menubar button:hover {
+  background:rgba(255,255,255,.1) !important;
+}
+.t20-sheet .editor-menu select,
+.t20-sheet .editor .ProseMirror-menubar select {
+  background:#2a2a2a !important; color:#ccc !important; border:1px solid #555 !important;
+  filter:invert(1) brightness(1.2) !important;
+}
+/* Editor body */
+.t20-sheet .ProseMirror {
+  background:var(--bg2) !important; color:var(--T) !important;
+  border:1px solid var(--B) !important; min-height:250px; padding:10px;
+}
+.t20-sheet .ProseMirror:focus { outline:1px solid var(--G) !important; }
+/* Scrollbar inside editor */
+.t20-sheet .ProseMirror::-webkit-scrollbar { width:5px; }
+.t20-sheet .ProseMirror::-webkit-scrollbar-thumb { background:var(--T5); border-radius:3px; }
+
+/* ═══════ ITEM SHEET ═══════ */
+.t20-item-sheet .item-name input{font-size:1.1rem;font-weight:700;background:none;border:none;padding:0;width:100%;color:var(--T)}
+.t20-item-sheet .item-name input:focus{box-shadow:none;border-bottom:1px solid var(--G)}
+.t20-item-sheet .item-type{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--T4);background:var(--bg3);padding:4px 12px;border-radius:10px}
+.t20-item-sheet .form-group{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.t20-item-sheet .form-group label{min-width:85px;font-size:.85rem;color:var(--T3);text-align:right;font-weight:600}
+.t20-item-sheet .form-group input{flex:1}
+
+/* ═══════ SCROLLBAR ═══════ */
+.sk-scroll::-webkit-scrollbar,.col-r::-webkit-scrollbar,.c-body::-webkit-scrollbar{width:5px}
+.sk-scroll::-webkit-scrollbar-track,.col-r::-webkit-scrollbar-track,.c-body::-webkit-scrollbar-track{background:transparent}
+.sk-scroll::-webkit-scrollbar-thumb,.col-r::-webkit-scrollbar-thumb,.c-body::-webkit-scrollbar-thumb{background:var(--T5);border-radius:3px}
+
+/* Chat */
+.t20-chat-card{padding:8px;border-left:3px solid var(--R)}
+.t20-chat-card h3{margin:0 0 5px;font-size:1rem;color:var(--G)}
+
+/* ═══════ FOUNDRY OVERRIDES ═══════ */
+.tormenta20 .sheet-tabs{border:none;outline:none;margin:0;padding:0}
+.tormenta20 nav.tabs{border:none;outline:none}
+.tormenta20 .tabs .item{outline:none}
+/* Regras do PC (não se aplicam à ficha NPC que tem padding próprio) */
+.tormenta20:not(.npc) .sheet-body{border:none;margin:0;padding:0}
+.tormenta20:not(.npc) .window-content form{margin:0;padding:0}
+
+/* ============================================================
+   COMPENDIUM PICKER
+   ============================================================ */
+.t20-picker-dialog .window-content { background: #1a1a1a !important; color: #ddd !important; }
+.t20-compendium-picker { display:flex; flex-direction:column; height:100%; gap:6px; background:#1a1a1a; color:#ddd; }
+.t20-compendium-picker .cp-search-row { display:flex; gap:6px; align-items:center; }
+.t20-compendium-picker .cp-search {
+  flex:1; padding:8px 12px; border:1px solid #555; border-radius:4px;
+  background:#111; color:#eee; font-size:14px; min-width:0;
+}
+.t20-compendium-picker .cp-search::placeholder { color:#666; }
+.t20-compendium-picker .cp-search:focus { border-color:#c53131; outline:none; box-shadow:0 0 6px rgba(197,49,49,.5); }
+.t20-compendium-picker .cp-blank-btn {
+  width:32px; height:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  border:1px solid #444; border-radius:4px; background:#222; color:#888; cursor:pointer; font-size:16px; padding:0;
+}
+.t20-compendium-picker .cp-blank-btn:hover { background:#444; color:#fff; }
+
+.t20-compendium-picker .cp-filters { display:flex; gap:3px; }
+.t20-compendium-picker .cp-filter {
+  flex:1; padding:3px 2px; border:1px solid #333; border-radius:3px;
+  background:#1f1f1f; color:#888; cursor:pointer; font-size:10px; text-align:center; white-space:nowrap;
+}
+.t20-compendium-picker .cp-filter:hover { background:#2a2a2a; color:#ccc; }
+.t20-compendium-picker .cp-filter.active { background:#c53131; border-color:#c53131; color:#fff; font-weight:700; }
+.t20-compendium-picker .cp-f-arc.active { background:#2c4a8a; border-color:#3b62b8; color:#c0d8ff; }
+.t20-compendium-picker .cp-f-div.active { background:#7a6420; border-color:#a88c30; color:#f0e0a0; }
+.t20-compendium-picker .cp-f-uni.active { background:#2a6a2a; border-color:#40a040; color:#c0f0c0; }
+
+.t20-compendium-picker .cp-list { flex:1; overflow-y:auto; border:1px solid #2a2a2a; border-radius:4px; background:#111; }
+.t20-compendium-picker .cp-item { display:flex; align-items:center; gap:6px; padding:4px 8px; cursor:pointer; border-bottom:1px solid #1e1e1e; }
+.t20-compendium-picker .cp-item:hover { background:#2a1515; }
+.t20-compendium-picker .cp-item img { border:none; border-radius:3px; flex-shrink:0; }
+.t20-compendium-picker .cp-name { flex:1; font-size:12px; font-weight:600; color:#e0d8c8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.t20-compendium-picker .cp-info { display:flex; gap:3px; flex-shrink:0; }
+.t20-compendium-picker .cp-tag { padding:1px 5px; border-radius:3px; background:#222; color:#999; font-size:10px; white-space:nowrap; }
+.t20-compendium-picker .cp-tag.cp-circ { background:#4a1515; color:#f0b0b0; font-weight:700; }
+.t20-compendium-picker .cp-tag.cp-req { background:#3a3015; color:#d8c060; font-style:italic; }
+.t20-compendium-picker .cp-tag.cp-arc { background:#1a2a4a; color:#80a8e0; }
+.t20-compendium-picker .cp-tag.cp-div { background:#3a3015; color:#c8b050; }
+.t20-compendium-picker .cp-tag.cp-uni { background:#1a3a1a; color:#80c080; }
+.t20-compendium-picker .cp-footer { text-align:center; font-size:10px; color:#555; padding:2px 0; }
+
+/* Deduct currency checkbox */
+.t20-compendium-picker .cp-deduct-row {
+  display:flex; align-items:center; gap:6px; font-size:11px; color:#aaa;
+  padding:2px 4px; cursor:pointer;
+}
+.t20-compendium-picker .cp-deduct-row input { accent-color:#c53131; }
+.t20-compendium-picker .cp-tag.cp-price { background:#2a3a15; color:#a8c860; font-weight:600; }
+.t20-compendium-picker .cp-list::-webkit-scrollbar { width:5px; }
+.t20-compendium-picker .cp-list::-webkit-scrollbar-track { background:transparent; }
+.t20-compendium-picker .cp-list::-webkit-scrollbar-thumb { background:#333; border-radius:3px; }
+
+/* ============================================================
+   EQUIP / COMBAT
+   ============================================================ */
+.tormenta20 .item-equipped { background:rgba(80,180,80,.08); }
+.tormenta20 .equip-on { color:#5cb85c; }
+.tormenta20 .equip-off { color:#555; }
+.tormenta20 .item-equip { cursor:pointer; margin-right:4px; }
+.tormenta20 .item-equip:hover .equip-off { color:#aaa; }
+.tormenta20 .i-roll { cursor:pointer; color:#c53131; margin-right:4px; font-size:14px; }
+.tormenta20 .i-roll:hover { color:#ff5555; text-shadow:0 0 4px rgba(255,80,80,.4); }
+.tormenta20 .sb-auto {
+  display:inline-block; padding:2px 6px; background:rgba(80,180,80,.1);
+  border:1px solid rgba(80,180,80,.2); border-radius:3px; color:#8c8;
+  font-weight:600; font-size:13px; min-width:30px; text-align:center;
+}
+
+/* ============================================================
+   CHAT COMBAT CARD — fundo escuro, texto legível
+   ============================================================ */
+.t20-combat-card {
+  background:#1a1a1a; border:1px solid #333; border-radius:6px;
+  padding:8px 10px; color:#ddd; font-family:var(--font-primary,"Signika",sans-serif);
+}
+.t20cc-header { font-size:15px; font-weight:700; color:#f0e0c0; border-bottom:1px solid #333; padding-bottom:4px; margin-bottom:6px; }
+.t20cc-row { display:flex; align-items:center; gap:8px; margin:3px 0; }
+.t20cc-label { font-size:11px; color:#888; min-width:50px; }
+.t20cc-roll { font-size:16px; font-weight:700; color:#eee; background:#2a2a2a; padding:2px 8px; border-radius:4px; }
+.t20cc-total { font-size:13px; color:#ccc; }
+.t20cc-dmg { font-size:18px; font-weight:700; color:#ff8844; background:#2a1a0a; padding:2px 10px; border-radius:4px; }
+.t20cc-dtype { font-size:11px; color:#999; }
+.t20cc-formula { font-size:10px; color:#666; margin:2px 0; }
+.t20cc-divider { border-top:1px solid #333; margin:6px 0; }
+.t20cc-crit {
+  font-size:14px; font-weight:700; color:#1a1a1a; background:linear-gradient(135deg,#ffcc00,#ff8800);
+  padding:3px 10px; border-radius:4px; text-align:center; margin:4px 0; text-transform:uppercase;
+  letter-spacing:1px;
+}
+.t20cc-fumble {
+  font-size:13px; font-weight:700; color:#fff; background:#881111;
+  padding:3px 10px; border-radius:4px; text-align:center; margin:4px 0;
+}
+.t20cc-critrow { background:rgba(255,200,0,.05); border-radius:4px; padding:2px 4px; }
+.t20cc-critdmg { color:#ffcc00 !important; background:#2a2a0a !important; font-size:20px; }
+.t20cc-cd {
+  font-size:20px; font-weight:700; color:#ff6644; text-align:center;
+  background:#2a1510; border:1px solid #442015; border-radius:6px;
+  padding:4px 0; margin:4px 0;
+}
+.t20cc-spell-info { display:flex; gap:4px; margin-bottom:4px; flex-wrap:wrap; }
+.t20cc-tag { padding:2px 6px; border-radius:3px; background:#222; color:#aaa; font-size:11px; }
+.t20cc-tag.t20cc-circ { background:#4a1515; color:#f0b0b0; font-weight:700; }
+.t20cc-detail { font-size:11px; color:#aaa; margin:1px 0; }
+.t20cc-detail b { color:#ddd; }
+.t20cc-desc { font-size:11px; color:#999; border-top:1px solid #333; padding-top:4px; margin-top:6px; line-height:1.4; }
+
+/* ============================================================
+   ITEM SHEET IMPROVEMENTS
+   ============================================================ */
+.t20-item-sheet .tab.detalhes,
+.t20-item-sheet .tab.melhorias {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 8px 4px;
+  overflow-x: hidden;
+}
+.t20-item-sheet .form-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+.t20-item-sheet .form-group label {
+  min-width: 110px;
+  text-align: right;
+  font-size: 12px;
+  color: #aaa;
+  flex-shrink: 0;
+}
+.t20-item-sheet .form-group input[type="text"],
+.t20-item-sheet .form-group input[type="number"],
+.t20-item-sheet .form-group select {
+  flex: 1;
+  min-width: 120px;
+}
+.t20-item-sheet .fg-row { display:flex; gap:12px; }
+.t20-item-sheet .fg-half { flex:1; display:flex; align-items:center; gap:6px; }
+.t20-item-sheet .fg-half label { min-width:70px; text-align:right; font-size:12px; color:#aaa; }
+.t20-item-sheet .fg-half input { flex:1; }
+
+/* Selects and textareas - DARK theme */
+.t20-item-sheet select,
+.t20-item-sheet .t20-select {
+  flex:1; min-width:140px; padding:6px 28px 6px 8px; border:1px solid #555; border-radius:3px;
+  background:#1a1a1a !important; color:#ddd !important; font-size:13px;
+  -webkit-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23999' stroke-width='1.5'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;
+  background-position:right 8px center !important;
+  height:auto; min-height:32px; line-height:1.4;
+}
+.t20-item-sheet select option {
+  background:#1a1a1a !important;
+  color:#ddd !important;
+  padding:4px 8px;
+}
+.t20-item-sheet textarea,
+.t20-item-sheet .t20-textarea {
+  width:100%; padding:6px; border:1px solid #555; border-radius:3px;
+  background:#1a1a1a; color:#ddd; font-size:12px; resize:vertical; font-family:inherit;
+}
+.t20-item-sheet .hint {
+  font-size:10px; color:#666; margin:2px 0 0 0; font-style:italic; flex-basis:100%;
+}
+
+/* Fieldset for improvements */
+.t20-item-sheet .t20-fieldset {
+  border:1px solid #333; border-radius:4px; padding:6px 10px; margin:6px 0;
+}
+.t20-item-sheet .t20-fieldset legend {
+  font-size:11px; font-weight:700; color:#c7a16b; padding:0 6px;
+}
+.t20-item-sheet .t20-chk {
+  display:block; font-size:11px; color:#bbb; padding:2px 0; cursor:pointer;
+}
+.t20-item-sheet .t20-chk:hover { color:#fff; }
+.t20-item-sheet .t20-chk input { accent-color:#c53131; margin-right:6px; }
+
+/* Circle section headers */
+.tormenta20 .circ-hdr {
+  display:flex; align-items:center; gap:6px;
+  border-bottom:2px solid #a82020; margin-top:6px; padding:3px 0 2px 0;
+}
+.tormenta20 .circ-hdr span {
+  font-size:11px; font-weight:700; color:#c7a16b; white-space:nowrap;
+}
+.tormenta20 .circ-add {
+  flex:1; border:none; background:none; color:#666; cursor:pointer;
+  font-size:12px; padding:2px; text-align:right;
+}
+.tormenta20 .circ-add:hover { color:#c53131; }
+
+/* CD block in sidebar */
+.tormenta20 .sb-cd-block {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 0; border-bottom:1px solid rgba(255,255,255,.06);
+}
+.tormenta20 .sb-cd-label { font-size:.82rem; font-weight:600; color:#c7a16b; }
+.tormenta20 .sb-cd-val {
+  font-size:1.4rem; font-weight:800; color:#ff6644;
+  min-width:36px; text-align:right;
+}
+.tormenta20 .sb-cd-formula {
+  font-size:9px; color:#666; text-align:center; padding:2px 0 4px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.tormenta20 .sb-select {
+  width:100%; padding:6px 24px 6px 6px; border:1px solid #555; border-radius:3px;
+  background:#1a1a1a; color:#ddd; font-size:12px;
+  -webkit-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 3l3 4 3-4' fill='none' stroke='%23999' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 6px center;
+  min-height:28px; box-sizing:border-box; line-height:1.3;
+  overflow:visible; text-overflow:ellipsis;
+}
+.tormenta20 .sb-select option { background:#1a1a1a; color:#ddd; }
+
+/* PV/PM max auto-calculated display */
+.tormenta20 .res-max-auto {
+  font-size:.9rem; font-weight:700; color:#aaa; min-width:28px; text-align:center;
+}
+
+.tormenta20 .sb-note { font-size:10px; color:#6a6; text-align:center; padding:1px 0; }
+
+/* Header pick fields */
+.tormenta20 .hdr-pick { cursor:pointer !important; border-bottom:1px dashed #666 !important; }
+.tormenta20 .hdr-pick:hover { border-bottom-color:#c53131 !important; color:#ff8866 !important; }
+
+/* Resistance textarea in sidebar */
+.tormenta20 .sb-res {
+  width:100%; padding:4px 6px; border:1px solid #444; border-radius:3px;
+  background:#1a1a1a; color:#ccc; font-size:10px; resize:vertical;
+  font-family:inherit; min-height:32px;
+}
+
+/* Currency badges */
+.tormenta20 .p-tb { background:#a82020; }
+.tormenta20 .p-to { background:#c7a16b; color:#1a1a1a; }
+
+/* ============================================================
+   GLOBAL MODIFIERS & CONDITIONS
+   ============================================================ */
+.tormenta20 .gmod-grid {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin:4px 0;
+}
+.tormenta20 .gmod {
+  text-align:center;
+}
+.tormenta20 .gmod label {
+  display:block; font-size:9px; color:#888; text-transform:uppercase; letter-spacing:.5px;
+}
+.tormenta20 .gmod input {
+  width:100%; text-align:center; font-size:14px; font-weight:700;
+  background:#111; border:1px solid #444; border-radius:3px; color:#ddd; padding:4px 0;
+}
+.tormenta20 .gmod input:focus { border-color:#c53131; }
+
+.tormenta20 .cond-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:1px 8px; margin:4px 0;
+}
+.tormenta20 .cond {
+  display:flex; align-items:center; gap:4px; padding:3px 4px;
+  font-size:11px; color:#bbb; cursor:pointer; border-radius:3px;
+}
+.tormenta20 .cond:hover { background:#2a1515; color:#fff; }
+.tormenta20 .cond input { accent-color:#c53131; flex-shrink:0; }
+.tormenta20 .cond input:checked + span { color:#ff6644; font-weight:600; }
+
+/* ============================================================
+   SUBCLASS PICKER — Card layout
+   ============================================================ */
+.t20-subclass-dialog .window-content { background:#141414 !important; }
+.t20-subclass-picker { padding:8px 12px; }
+.t20-subclass-picker .sub-title {
+  font-size:12px; color:#888; text-align:center;
+  margin-bottom:10px; padding-bottom:6px;
+  border-bottom:1px solid #333;
+}
+.t20-subclass-picker .sub-card {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:12px 14px; margin-bottom:8px;
+  background:#1e1e1e; border:1px solid #333; border-radius:6px;
+  cursor:pointer; transition:all .15s;
+}
+.t20-subclass-picker .sub-card:hover {
+  background:#2a1515; border-color:#a82020;
+  box-shadow:0 0 8px rgba(168,32,32,.3);
+}
+.t20-subclass-picker .sub-card-icon {
+  width:36px; height:36px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  background:#a82020; border-radius:50%;
+  font-size:16px; color:#ffd;
+}
+.t20-subclass-picker .sub-card-body { flex:1; min-width:0; }
+.t20-subclass-picker .sub-card-name {
+  font-size:14px; font-weight:700; color:#e0d8c8;
+  margin-bottom:3px;
+}
+.t20-subclass-picker .sub-card-desc {
+  font-size:11px; color:#999; line-height:1.4;
+}
+
+/* Stacked sidebar field (label above) */
+.tormenta20 .sb-f--stack {
+  flex-direction:column; align-items:stretch; gap:2px;
+}
+.tormenta20 .sb-f--stack label { text-align:left; font-size:.72rem; }
+.tormenta20 .sb-f--stack .sb-select { width:100%; }
+
+/* Auto-resistance display */
+.tormenta20 .sb-res-auto {
+  font-size:10px; color:#c7a16b; padding:4px 6px;
+  background:rgba(199,161,107,.08); border:1px solid rgba(199,161,107,.2);
+  border-radius:3px; line-height:1.4; margin-bottom:4px;
+}
+
+/* ============================================================
+   SPELL DIALOG
+   ============================================================ */
+.t20-spell-dlg .window-content { background:#141414 !important; }
+.t20-spell-dialog { padding:6px 10px; }
+
+.t20-spell-dialog .tsd-tags {
+  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;
+}
+.t20-spell-dialog .tsd-tag {
+  padding:3px 8px; border-radius:12px; font-size:11px; font-weight:600;
+  background:#222; color:#aaa;
+}
+.t20-spell-dialog .tsd-circ { background:#4a1515; color:#f0b0b0; }
+.t20-spell-dialog .tsd-cd { background:#a82020; color:#fff; font-size:13px; }
+
+.t20-spell-dialog .tsd-details {
+  background:#1a1a1a; border:1px solid #333; border-radius:4px;
+  padding:6px 10px; margin-bottom:8px;
+}
+.t20-spell-dialog .tsd-det { font-size:11px; color:#ccc; line-height:1.6; }
+.t20-spell-dialog .tsd-det b { color:#c7a16b; }
+
+.t20-spell-dialog .tsd-desc {
+  font-size:12px; color:#bbb; line-height:1.5;
+  max-height:180px; overflow-y:auto; padding:8px;
+  background:#111; border:1px solid #2a2a2a; border-radius:4px;
+  margin-bottom:10px;
+}
+.t20-spell-dialog .tsd-desc::-webkit-scrollbar { width:4px; }
+.t20-spell-dialog .tsd-desc::-webkit-scrollbar-thumb { background:#555; border-radius:2px; }
+
+.t20-spell-dialog .tsd-pm-block {
+  display:flex; justify-content:space-between; padding:4px 0;
+  font-size:12px; color:#ddd;
+}
+.t20-spell-dialog .tsd-pm-val { font-weight:700; color:#55aaff; }
+
+.t20-spell-dialog .tsd-aprim-title {
+  font-size:11px; font-weight:700; color:#c7a16b; text-transform:uppercase;
+  letter-spacing:.8px; padding:4px 0 2px; border-top:1px solid #333;
+  margin-top:6px;
+  display:flex; justify-content:space-between; align-items:baseline; gap:8px;
+}
+.t20-spell-dialog .tsd-aprim-hint {
+  font-size:9px; font-weight:500; color:#888;
+  text-transform:none; letter-spacing:0; font-style:italic;
+}
+.t20-spell-dialog .tsd-aprims { margin-bottom:8px; }
+.t20-spell-dialog .tsd-aprim {
+  display:flex; align-items:center; gap:6px;
+  padding:5px 4px; font-size:11px; color:#bbb;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  transition: background 0.15s, color 0.15s;
+}
+.t20-spell-dialog .tsd-aprim-bool-type {
+  cursor: pointer;
+}
+.t20-spell-dialog .tsd-aprim:hover {
+  color:#fff; background:rgba(199,161,107,0.04);
+}
+.t20-spell-dialog .tsd-aprim.tsd-aprim-active {
+  background:rgba(168,32,32,0.1);
+  color:#fff;
+  border-left: 2px solid #d72f2f;
+}
+/* Input numérico (aprimoramentos de dano escalável) */
+.t20-spell-dialog .tsd-aprim-qty {
+  width:42px !important; flex-shrink:0;
+  background:#1a1a1a !important;
+  border:1px solid #5c5c5c !important;
+  color:#ffdd99 !important;
+  padding:3px 4px !important;
+  text-align:center !important;
+  font-weight:700 !important;
+  font-size:13px !important;
+  border-radius:3px !important;
+  -moz-appearance:textfield !important;
+}
+.t20-spell-dialog .tsd-aprim-qty::-webkit-inner-spin-button,
+.t20-spell-dialog .tsd-aprim-qty::-webkit-outer-spin-button {
+  -webkit-appearance:none; margin:0;
+}
+.t20-spell-dialog .tsd-aprim-qty:focus {
+  outline:none !important;
+  border-color:#c7a16b !important;
+  box-shadow:0 0 0 2px rgba(199,161,107,0.3) !important;
+}
+.t20-spell-dialog .tsd-aprim-active .tsd-aprim-qty {
+  border-color:#d72f2f !important;
+  color:#fff !important;
+  background:#2a0f0f !important;
+}
+/* Checkbox (aprimoramentos boolean — sem dano ou uso único) */
+.t20-spell-dialog .tsd-aprim-chk {
+  width:20px !important;
+  height:20px !important;
+  flex-shrink:0;
+  cursor:pointer;
+  accent-color:#c53131 !important;
+  margin:0 6px 0 11px !important;
+}
+.t20-spell-dialog .tsd-aprim-pm {
+  font-weight:700; color:#55aaff; white-space:nowrap; min-width:44px;
+}
+.t20-spell-dialog .tsd-aprim-qual {
+  font-size:10px; font-weight:600; color:#c7a16b;
+  background:#2a1f10; border:1px solid #4a3820; border-radius:3px;
+  padding:1px 5px; white-space:nowrap; flex-shrink:0;
+}
+.t20-spell-dialog .tsd-aprim-dmg {
+  font-size:10px; font-weight:700; color:#fff;
+  background:#7a1a1a; border:1px solid #c53131; border-radius:3px;
+  padding:1px 5px; white-space:nowrap; flex-shrink:0;
+}
+.t20-spell-dialog .tsd-aprim-oneshot {
+  font-size:9px; font-weight:700; color:#888;
+  background:#2a2a2a; border:1px solid #444; border-radius:3px;
+  padding:1px 4px; white-space:nowrap; flex-shrink:0;
+}
+.t20-spell-dialog .tsd-aprim-text { flex:1; line-height:1.4; word-break:break-word; }
+.t20-spell-dialog .tsd-desc p { margin:0 0 6px 0; }
+.t20-spell-dialog .tsd-desc p:last-child { margin-bottom:0; }
+.t20-spell-dialog .tsd-desc b { color:#e2c07a; }
+.t20-spell-dialog .tsd-desc i { color:#ccc; }
+
+.t20-spell-dialog .tsd-total {
+  display:flex; justify-content:space-between; padding:8px 0;
+  font-size:14px; font-weight:700; color:#ddd;
+  border-top:2px solid #a82020;
+}
+.t20-spell-dialog .tsd-total-val { color:#ff6644; font-size:16px; }
+
+/* Incluir Ataque row */
+.t20-spell-dialog .tsd-attack-row {
+  display:flex; align-items:center; gap:10px; padding:8px 0;
+  border-top:1px solid #333; flex-wrap:wrap;
+}
+.t20-spell-dialog .tsd-atk-check {
+  font-size:12px; color:#ccc; cursor:pointer;
+  display:flex; align-items:center; gap:6px;
+  white-space:nowrap; flex-shrink:0;
+}
+.t20-spell-dialog .tsd-atk-check input { accent-color:#a82020; }
+.t20-spell-dialog .tsd-atk-skill {
+  flex:1; min-width:120px; max-width:200px;
+  padding:6px 24px 6px 8px; border:1px solid #555; border-radius:3px;
+  background:#1a1a1a; color:#ddd; font-size:12px;
+  -webkit-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 3l3 4 3-4' fill='none' stroke='%23999' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 6px center;
+  min-height:28px; box-sizing:border-box; line-height:1.3;
+}
+.t20-spell-dialog .tsd-atk-skill option { background:#1a1a1a; color:#ddd; }
+
+/* Fix: Atr. Chave - centered label */
+.tormenta20 .sb-f--stack {
+  flex-direction:column; align-items:center; gap:3px;
+  text-align:center;
+}
+.tormenta20 .sb-f--stack label {
+  text-align:center; font-size:.72rem; width:100%;
+}
+.tormenta20 .sb-f--stack .sb-select {
+  width:100%; text-align:center; text-align-last:center;
+}
+
+/* ============================================================
+   RESISTANCE TAGS + PICKER
+   ============================================================ */
+.tormenta20 .sb-res-tags {
+  display:flex; flex-wrap:wrap; gap:4px; padding:4px 0;
+}
+.tormenta20 .sb-res-tag {
+  display:inline-flex; align-items:center; gap:3px;
+  padding:2px 6px; border-radius:3px; font-size:10px; font-weight:600;
+  background:rgba(168,32,32,.2); color:#e8a0a0; border:1px solid rgba(168,32,32,.3);
+}
+.tormenta20 .sb-res-tag .res-remove {
+  cursor:pointer; font-size:12px; color:#888; margin-left:2px;
+  line-height:1;
+}
+.tormenta20 .sb-res-tag .res-remove:hover { color:#ff4444; }
+.tormenta20 .sb-res-add {
+  width:100%; margin-top:4px; padding:4px;
+  background:none; border:1px dashed #444; border-radius:3px;
+  color:#888; font-size:10px; cursor:pointer;
+  transition:all .15s;
+}
+.tormenta20 .sb-res-add:hover { border-color:#a82020; color:#c7a16b; }
+.tormenta20 .sb-res-add i { margin-right:3px; }
+
+/* Resistance picker dialog */
+.t20-res-dlg .window-content { background:#141414 !important; }
+.t20-res-picker { padding:4px 8px; }
+.t20-res-picker .rp-search-row { margin-bottom:6px; }
+.t20-res-picker .rp-search {
+  width:100%; padding:6px 10px; border:1px solid #555; border-radius:4px;
+  background:#111; color:#ddd; font-size:12px;
+}
+.t20-res-picker .rp-cat {
+  font-size:10px; font-weight:700; color:#c7a16b; text-transform:uppercase;
+  letter-spacing:.8px; padding:6px 0 3px; border-bottom:1px solid #333;
+  margin-top:4px;
+}
+.t20-res-picker .rp-item {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:5px 8px; cursor:pointer; font-size:11px; color:#ccc;
+  border-bottom:1px solid rgba(255,255,255,.03); transition:all .1s;
+}
+.t20-res-picker .rp-item:hover { background:#2a1515; color:#fff; }
+.t20-res-picker .rp-item.rp-has {
+  opacity:.4; pointer-events:none; text-decoration:line-through;
+}
+.t20-res-picker .rp-item .fa-check { color:#6a6; font-size:10px; }
+
+/* ================================================================
+   v4: Botão "Rolar Dano" no Chat Card de Magias
+   ================================================================ */
+.t20-spell-dmg-btn,
+.t20-invencao-ativar-btn {
+  display: block;
+  width: 100%;
+  margin: 6px 0 4px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #c53131, #8b2020);
+  color: #fff !important;
+  border: 1px solid #ff4444;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s, transform 0.1s;
+}
+.t20-spell-dmg-btn:hover,
+.t20-invencao-ativar-btn:hover {
+  background: linear-gradient(135deg, #e04040, #a82828);
+  transform: scale(1.02);
+}
+.t20-spell-dmg-btn i,
+.t20-invencao-ativar-btn i { margin-right: 6px; }
+
+.t20-invencao-ativar-btn {
+  background: linear-gradient(135deg, #5a4a2a, #3a3020);
+  border-color: #c7a16b;
+}
+.t20-invencao-ativar-btn:hover {
+  background: linear-gradient(135deg, #7a6a3a, #5a4a2a);
+}
+
+/* Spell dialog — dano info */
+.tsd-dano-info {
+  margin: 4px 0;
+  padding: 4px 8px;
+  background: rgba(197, 49, 49, 0.15);
+  border-left: 3px solid #c53131;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #ddd;
+}
+.tsd-dano-val { color: #ff6b6b; font-weight: bold; }
+.tsd-dano-tipo { color: #c7a16b; }
+.t20cc-spell-dmg-section { padding: 4px 0; }
+
+/* ================================================================
+   v4: Tab Invenções (Inventor)
+   ================================================================ */
+.inv-broken {
+  opacity: 0.6;
+  background: rgba(244, 67, 54, 0.08) !important;
+}
+.inv-broken .i-nm {
+  text-decoration: line-through;
+  color: #f44336 !important;
+}
+.invencao-activate { cursor: pointer; }
+.invencao-activate:hover i { color: #c7a16b; }
+.invencao-repair { cursor: pointer; }
+.invencao-repair:hover i { color: #ffb74d !important; }
+
+/* Engenhoca: campo Magia Simulada clicável */
+input.inv-pick-magia {
+  border-color: #c7a16b !important;
+  color: #c7a16b !important;
+  font-weight: bold;
+}
+input.inv-pick-magia:hover {
+  background: rgba(199, 161, 107, 0.1) !important;
+}
+input.inv-pick-magia::placeholder {
+  color: #888 !important;
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Engenhoca: PV inline na lista */
+.inv-pv-cell { padding: 0 2px !important; }
+.inv-pv-wrap {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+}
+.inv-pv-input {
+  width: 32px !important;
+  height: 20px !important;
+  padding: 0 2px !important;
+  text-align: center;
+  font-size: 12px;
+  background: #1a1a1a !important;
+  border: 1px solid #555 !important;
+  color: #e6e6e6 !important;
+  border-radius: 2px;
+}
+.inv-pv-sep { color: #666; font-size: 11px; }
+.inv-pv-max { color: #888; font-size: 11px; }
+.inv-pv-bar {
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  margin-top: 2px;
+  overflow: hidden;
+}
+.inv-pv-fill {
+  height: 100%;
+  background: #c53131;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Nome da engenhoca clicável */
+.invencao-details {
+  color: #c7a16b !important;
+}
+.invencao-details:hover {
+  text-decoration: underline;
+  color: #e0c080 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NPC / MONSTRO SHEET
+   Layout compacto estilo statblock, mesma paleta do personagem
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Garante que o container Foundry não zere o padding */
+.sheet.actor.npc .window-content {
+  padding: 0 !important;
+  background: #1a1a1a !important;
+  overflow-x: hidden;
+}
+
+.tormenta20 form.t20-npc-sheet,
+.t20-npc-sheet {
+  background: #1a1a1a;
+  color: #ddd;
+  font-size: 13px;
+  padding: 12px 14px 14px 14px !important;
+  min-height: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 !important;
+}
+.t20-npc-sheet * {
+  box-sizing: border-box;
+}
+
+.t20-npc-sheet input,
+.t20-npc-sheet select,
+.t20-npc-sheet textarea {
+  background: #252525;
+  color: #ddd !important;
+  border: 1px solid #3a3a3a;
+  padding: 5px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.t20-npc-sheet input[type="number"],
+.t20-npc-sheet input[type="text"] {
+  height: 32px;
+  box-sizing: border-box;
+}
+.t20-npc-sheet input[type="number"] {
+  text-align: center;
+}
+.t20-npc-sheet select {
+  height: 32px;
+  line-height: 1.4;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23c7a16b' d='M0 0l5 6 5-6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding: 0 26px 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* Estiliza o dropdown aberto (evita fundo branco padrão do browser) */
+.t20-npc-sheet select option,
+.t20-picker-dialog select option,
+.t20-natural-dialog select option,
+.t20-statblock-dialog select option {
+  background: #252525 !important;
+  color: #ddd !important;
+  padding: 6px 10px;
+}
+.t20-npc-sheet select option:hover,
+.t20-npc-sheet select option:focus,
+.t20-npc-sheet select option:checked {
+  background: #c53131 !important;
+  color: #fff !important;
+}
+
+/* ─── HEADER ─── */
+.npc-header {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 14px;
+  padding: 12px;
+  background: linear-gradient(135deg, #2a1515 0%, #1f1f1f 100%);
+  border: 1px solid #3a2a2a;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.npc-hdr-portrait .profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 6px;
+  border: 2px solid #c53131;
+  object-fit: cover;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(197, 49, 49, 0.3);
+  transition: box-shadow 0.2s;
+}
+.npc-hdr-portrait .profile-img:hover {
+  box-shadow: 0 0 18px rgba(197, 49, 49, 0.6);
+}
+.npc-hdr-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-start;
+}
+.npc-name {
+  font-size: 18px !important;
+  font-weight: bold;
+  color: #c7a16b !important;
+  background: #1a1a1a !important;
+  border: 1px solid #3a3a3a !important;
+}
+.npc-hdr-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.npc-hm {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 70px;
+}
+.npc-hm--xs {
+  max-width: 85px;
+}
+.npc-hm label {
+  font-size: 10px;
+  color: #c7a16b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+.xp-auto-btn {
+  color: #c7a16b;
+  cursor: pointer;
+  font-size: 10px;
+}
+.xp-auto-btn:hover { color: #e0c080; }
+
+/* ─── RECURSOS (PV / PM / DEF / CD / INIC) ─── */
+.npc-res-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.4fr 1fr 1fr 0.8fr;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.npc-res {
+  background: #252525;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nres-label {
+  font-size: 10px;
+  color: #c7a16b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.nres-nums {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.nres-cur, .nres-max {
+  width: 50px;
+  height: 26px !important;
+  font-size: 14px;
+  font-weight: bold;
+}
+.nres-max {
+  color: #c7a16b !important;
+}
+.npc-autofill-hp-btn {
+  color: #c7a16b;
+  cursor: pointer;
+  margin-left: 4px;
+}
+.npc-autofill-hp-btn:hover { color: #e0c080; }
+.nres-bar {
+  height: 4px;
+  background: #111;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.nres-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.nres-fill--pv { background: #c53131; }
+.nres-fill--pm { background: #4a7ba8; }
+
+.npc-stat-box {
+  background: #252525;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.nsb-val {
+  font-size: 22px;
+  font-weight: bold;
+  color: #c7a16b;
+  line-height: 1;
+}
+.nsb-val.nsb-red { color: #c53131; }
+.nsb-lbl {
+  font-size: 9px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.nsb-sub {
+  font-size: 10px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 2px;
+}
+.nsb-mini {
+  width: 32px !important;
+  height: 22px !important;
+  font-size: 10px !important;
+  padding: 1px 3px !important;
+}
+.nsb-atr {
+  height: 22px !important;
+  font-size: 10px !important;
+  padding: 1px 18px 1px 4px !important;
+  width: 48px;
+}
+.npc-stat-init {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.npc-stat-init:hover {
+  background: #2f1a1a;
+  border-color: #c53131;
+}
+
+/* ─── ATRIBUTOS ─── */
+.npc-atr-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.natr {
+  background: #252525;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.natr-lbl {
+  font-size: 10px;
+  color: #c7a16b;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+.natr-mod {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e6e6e6;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 3px;
+  transition: background 0.15s;
+  line-height: 1;
+}
+.natr-mod:hover {
+  background: #3a2a2a;
+  color: #c53131;
+}
+.natr-val {
+  width: 50px !important;
+  height: 22px !important;
+  font-size: 11px !important;
+  padding: 1px 3px !important;
+  text-align: center !important;
+}
+
+/* ─── TABS ─── */
+.npc-tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #3a3a3a;
+  width: 100%;
+}
+.npc-tabs .item {
+  flex: 1;
+  padding: 6px 8px;
+  background: #1f1f1f;
+  color: #888;
+  text-align: center;
+  font-size: 11px;
+  cursor: pointer;
+  border: 1px solid #2a2a2a;
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.15s;
+}
+.npc-tabs .item:hover {
+  background: #2a2a2a;
+  color: #c7a16b;
+}
+.npc-tabs .item.active {
+  background: #2a1515;
+  color: #c7a16b;
+  border-color: #c53131;
+  border-bottom: 1px solid #2a1515;
+  margin-bottom: -1px;
+}
+.npc-tabs .item i {
+  margin-right: 3px;
+}
+
+/* ─── SEÇÕES INTERNAS ─── */
+.npc-section-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2a1515;
+  color: #c7a16b;
+  padding: 6px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  border-left: 3px solid #c53131;
+  margin: 8px 0 4px 0;
+  gap: 8px;
+}
+.npc-section-hdr > span {
+  flex: 0 0 auto;
+}
+.npc-section-hdr button {
+  flex: 0 0 auto;
+  width: auto;
+  background: #1a1a1a;
+  color: #c7a16b;
+  border: 1px solid #c7a16b;
+  padding: 3px 10px;
+  font-size: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: nowrap;
+  height: 24px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.npc-section-hdr button:hover {
+  background: #c7a16b;
+  color: #1a1a1a;
+}
+
+/* ─── PERÍCIAS ─── */
+.npc-skills-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: #2a1515;
+  color: #c7a16b;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-left: 3px solid #c53131;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+.npc-skills-hdr > span {
+  flex: 0 0 auto;
+  letter-spacing: 0.5px;
+}
+.pericia-toggle-btn {
+  flex: 0 0 auto;
+  background: #1a1a1a;
+  color: #c7a16b;
+  border: 1px solid #c7a16b;
+  padding: 3px 10px;
+  font-size: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: nowrap;
+  height: 24px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: auto;
+}
+.pericia-toggle-btn:hover {
+  background: #c7a16b;
+  color: #1a1a1a;
+}
+.npc-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  background: #1f1f1f;
+  border-radius: 4px;
+}
+.npc-sk {
+  display: grid;
+  grid-template-columns: 1fr auto 40px 20px;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  background: #252525;
+  border: 1px solid #2f2f2f;
+  border-radius: 3px;
+  font-size: 11px;
+}
+.npc-sk .sk-name {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.npc-sk .sk-name:hover {
+  color: #c53131;
+}
+.npc-sk .sk-star {
+  color: #c7a16b;
+  font-size: 9px;
+}
+.npc-sk .sk-mod {
+  font-weight: bold;
+  color: #c7a16b;
+  min-width: 28px;
+  text-align: right;
+}
+.npc-sk .sk-bonus {
+  width: 34px !important;
+  height: 22px !important;
+  font-size: 10px !important;
+  padding: 1px 3px !important;
+}
+.npc-sk .sk-train {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Editor de perícias visíveis (colapsável) */
+.pericia-editor {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #1f1f1f;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+.pericia-editor.open {
+  max-height: 300px;
+  padding: 8px;
+  border: 1px solid #3a3a3a;
+}
+.pe-title {
+  font-size: 11px;
+  color: #c7a16b;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.pe-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+.pe-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  color: #bbb;
+}
+.pe-item input {
+  margin: 0;
+}
+.pe-item:hover { color: #c7a16b; }
+
+/* Sentidos & Resistências */
+.npc-sense-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+.nsr-box {
+  background: #252525;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 6px;
+}
+.nsr-lbl {
+  font-size: 10px;
+  color: #c7a16b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.nsr-box input {
+  width: 100%;
+}
+
+.npc-res-list {
+  margin-top: 8px;
+  background: #1f1f1f;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+}
+.nrl-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  background: #2a1515;
+  color: #c7a16b;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-left: 3px solid #c53131;
+}
+.nrl-hdr button {
+  background: #1a1a1a;
+  color: #c7a16b;
+  border: 1px solid #c7a16b;
+  padding: 1px 6px;
+  font-size: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.nrl-hdr button:hover {
+  background: #c7a16b;
+  color: #1a1a1a;
+}
+.nrl-items {
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 28px;
+}
+.nrl-item {
+  background: #2a2a2a;
+  border: 1px solid #4a4a4a;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ddd;
+}
+.nrl-item .res-remove {
+  color: #c53131;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.nrl-item .res-remove:hover {
+  opacity: 1;
+}
+
+/* ─── LISTAS DE ITEMS (ataques, poderes, etc.) ─── */
+.t20-npc-sheet .item-list .item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  background: #252525;
+  border: 1px solid #2f2f2f;
+  border-radius: 3px;
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+.t20-npc-sheet .item-list .item:hover {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+}
+.t20-npc-sheet .item-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.t20-npc-sheet .item-name {
+  flex: 1;
+  color: #e6e6e6;
+  font-weight: 500;
+}
+.t20-npc-sheet .item-tag {
+  background: #1a1a1a;
+  color: #c7a16b;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.t20-npc-sheet .item-actions {
+  display: flex;
+  gap: 6px;
+  margin-left: 6px;
+}
+.t20-npc-sheet .item-actions a {
+  color: #888;
+  cursor: pointer;
+  transition: color 0.15s;
+  font-size: 12px;
+}
+.t20-npc-sheet .item-actions a:hover {
+  color: #c7a16b;
+}
+.t20-npc-sheet .item-actions a.roll-arma {
+  color: #c53131;
+}
+.t20-npc-sheet .item-actions a.roll-arma:hover {
+  color: #ff5050;
+}
+.t20-npc-sheet .item-actions a.equipped {
+  color: #4a9c5a;
+}
+
+/* ─── MENSAGENS VAZIAS ─── */
+.t20-npc-sheet .npc-empty {
+  text-align: center;
+  padding: 16px;
+  color: #666;
+  font-style: italic;
+  font-size: 12px;
+}
+.t20-npc-sheet .npc-empty-inline {
+  color: #666;
+  font-style: italic;
+  font-size: 11px;
+}
+
+/* ─── BIO TAB ─── */
+.npc-body .tab {
+  padding-top: 10px;
+  width: 100%;
+}
+
+.t20-npc-sheet .item-list {
+  background: #1f1f1f;
+  border-radius: 4px;
+  padding: 2px;
+  width: 100%;
+}
+
+.npc-bio-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-top: 4px;
+}
+.npc-bio-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.npc-bio-col label {
+  font-size: 10px;
+  color: #c7a16b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.npc-bio-col input {
+  width: 100%;
+}
+.t20-npc-sheet .tab > label {
+  font-size: 10px;
+  color: #c7a16b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 8px;
+  font-weight: 600;
+}
+.t20-npc-sheet textarea {
+  width: 100%;
+  min-height: 200px;
+  resize: vertical;
+  font-family: inherit;
+  margin-top: 4px;
+}
+
+/* ─── BOTÕES DE CÍRCULO DE MAGIA ─── */
+.npc-circles-add {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 6px;
+  background: #1f1f1f;
+  border-radius: 4px;
+}
+.npc-circles-add button {
+  flex: 1;
+  background: #2a2a2a;
+  color: #c7a16b;
+  border: 1px solid #3a3a3a;
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.npc-circles-add button:hover {
+  background: #c7a16b;
+  color: #1a1a1a;
+  border-color: #c7a16b;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MÓDULO 2 — ATAQUE NATURAL, MÚLTIPLOS, CLONAGEM
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Header da seção com múltiplos botões */
+.npc-section-actions {
+  display: flex;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+.npc-section-actions button {
+  flex: 0 0 auto;
+  width: auto;
+  background: #1a1a1a;
+  color: #c7a16b;
+  border: 1px solid #c7a16b;
+  padding: 3px 10px;
+  font-size: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: nowrap;
+  height: 24px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.npc-section-actions button:hover {
+  background: #c7a16b;
+  color: #1a1a1a;
+}
+.npc-section-actions .natural-attack-create {
+  border-color: #c53131;
+  color: #c53131;
+}
+.npc-section-actions .natural-attack-create:hover {
+  background: #c53131;
+  color: #fff;
+}
+
+/* Visual distinto para ataques naturais */
+.t20-npc-sheet .item.item--natural {
+  border-left: 3px solid #c53131;
+  background: #271818;
+}
+.t20-npc-sheet .item.item--natural:hover {
+  background: #2f1f1f;
+}
+.t20-npc-sheet .natural-icon {
+  color: #c53131;
+  font-size: 11px;
+  margin-right: 4px;
+}
+.t20-npc-sheet .item-multi {
+  background: #c53131;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  margin-left: 6px;
+  font-weight: bold;
+}
+.t20-npc-sheet .item-tag--atk {
+  background: #2a1515;
+  color: #ff7b7b !important;
+  border: 1px solid #c53131;
+}
+
+/* Dialog de Ataque Natural */
+.t20-natural-dialog {
+  color: #ddd;
+  font-size: 12px;
+}
+.t20-natural-dialog .nad-preset-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: #1a1a1a;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.t20-natural-dialog .nad-preset-row label {
+  color: #c7a16b;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.t20-natural-dialog .nad-preset {
+  flex: 1;
+  background: #252525 !important;
+  color: #ddd !important;
+  border: 1px solid #3a3a3a !important;
+  padding: 4px 8px !important;
+  border-radius: 3px;
+  height: 28px !important;
+}
+.t20-natural-dialog .nad-grid {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 6px 8px;
+  align-items: center;
+  padding: 8px;
+  background: #1f1f1f;
+  border-radius: 4px;
+}
+.t20-natural-dialog .nad-grid label {
+  font-size: 11px;
+  color: #c7a16b;
+  font-weight: 500;
+}
+.t20-natural-dialog .nad-grid input,
+.t20-natural-dialog .nad-grid select {
+  background: #252525 !important;
+  color: #ddd !important;
+  border: 1px solid #3a3a3a !important;
+  padding: 4px 8px !important;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.t20-natural-dialog .nad-grid select {
+  height: 28px !important;
+}
+.t20-natural-dialog .nad-hint {
+  margin-top: 10px;
+  padding: 8px;
+  background: #1a1a1a;
+  border-left: 3px solid #c7a16b;
+  border-radius: 0 3px 3px 0;
+  color: #aaa;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.t20-natural-dialog .nad-hint i {
+  color: #c7a16b;
+  margin-right: 4px;
+}
+.t20-natural-dialog .nad-hint code {
+  background: #252525;
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: #c7a16b;
+  font-family: monospace;
+}
+
+/* Sub-cabeçalho em múltiplos ataques no card do chat */
+.t20cc-multi-hdr {
+  color: #c7a16b;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 6px 0 2px 0;
+  padding-bottom: 2px;
+  border-bottom: 1px dashed #3a3a3a;
+}
+.t20cc-divider-sub {
+  margin: 4px 0;
+  opacity: 0.5;
+}
+
+/* Divisor "Modo Statblock" na ficha de item arma */
+.fg-statblock-hdr {
+  background: #2a1515;
+  color: #c7a16b;
+  padding: 5px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  border-left: 3px solid #c53131;
+  margin: 10px 0 6px 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MÓDULO 3 — IMPORTADOR DE STATBLOCK
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Botão no header da ficha de NPC */
+.npc-name-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.statblock-import-btn {
+  background: linear-gradient(135deg, #c53131 0%, #7a1a1a 100%);
+  color: #fff !important;
+  border: 1px solid #c53131;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: bold;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.statblock-import-btn:hover {
+  background: linear-gradient(135deg, #e04040 0%, #a02020 100%);
+  box-shadow: 0 0 8px rgba(197, 49, 49, 0.5);
+}
+.statblock-import-btn i {
+  margin-right: 3px;
+}
+
+/* Dialog de importação */
+.t20-statblock-dialog .window-content {
+  background: #1a1a1a !important;
+  color: #ddd !important;
+  padding: 10px !important;
+}
+.t20-statblock-import {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.t20-statblock-import .sbi-hint {
+  background: #252525;
+  border-left: 3px solid #c7a16b;
+  padding: 8px 10px;
+  border-radius: 0 3px 3px 0;
+  font-size: 11px;
+  color: #bbb;
+  line-height: 1.4;
+}
+.t20-statblock-import .sbi-hint i {
+  color: #c7a16b;
+  margin-right: 4px;
+}
+.t20-statblock-import .sbi-example-toggle {
+  margin-top: 4px;
+}
+.t20-statblock-import .sbi-show-example {
+  color: #c7a16b;
+  font-size: 10px;
+  text-decoration: underline;
+}
+.t20-statblock-import .sbi-show-example:hover {
+  color: #e0c080;
+}
+.t20-statblock-import .sbi-example {
+  background: #0e0e0e !important;
+  color: #8b8b8b !important;
+  padding: 8px 10px;
+  border-radius: 3px;
+  margin-top: 6px;
+  font-family: monospace;
+  font-size: 10px;
+  line-height: 1.4;
+  max-height: 180px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  border: 1px solid #2a2a2a;
+}
+.t20-statblock-import .sbi-textarea {
+  width: 100%;
+  min-height: 260px;
+  background: #0e0e0e !important;
+  color: #e6e6e6 !important;
+  border: 1px solid #3a3a3a !important;
+  border-radius: 3px;
+  padding: 8px 10px !important;
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 12px !important;
+  line-height: 1.45;
+  resize: vertical;
+}
+.t20-statblock-import .sbi-textarea:focus {
+  outline: none;
+  border-color: #c7a16b !important;
+  box-shadow: 0 0 4px rgba(199, 161, 107, 0.3);
+}
+.t20-statblock-import .sbi-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #1f1f1f;
+  padding: 8px 10px;
+  border-radius: 3px;
+  border: 1px solid #2a2a2a;
+}
+.t20-statblock-import .sbi-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #ccc;
+  cursor: pointer;
+}
+.t20-statblock-import .sbi-options input[type="checkbox"] {
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PREVIEW INLINE — aparece abaixo do item ao clicar no nome
+   ═══════════════════════════════════════════════════════════════ */
+.t20-npc-sheet .item-name-toggle {
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.t20-npc-sheet .item-name-toggle:hover {
+  color: #c7a16b !important;
+}
+
+.t20-npc-sheet .item-preview {
+  background: #1a1a1a;
+  border: 1px solid #c7a16b;
+  border-left: 3px solid #c53131;
+  border-radius: 0 4px 4px 0;
+  padding: 10px 12px;
+  margin: 2px 0 6px 20px;
+  font-size: 12px;
+  color: #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.t20-npc-sheet .item-preview .ip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px dashed #3a3a3a;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+.t20-npc-sheet .item-preview .ip-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  border: 1px solid #3a3a3a;
+  flex-shrink: 0;
+}
+.t20-npc-sheet .item-preview .ip-title {
+  flex: 1;
+  color: #c7a16b;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+.t20-npc-sheet .item-preview .ip-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: all 0.15s;
+}
+.t20-npc-sheet .item-preview .ip-close:hover {
+  color: #c53131;
+  background: #2a1515;
+}
+.t20-npc-sheet .item-preview .ip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.t20-npc-sheet .item-preview .ip-tag {
+  background: #252525;
+  border: 1px solid #3a3a3a;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  color: #ccc;
+}
+.t20-npc-sheet .item-preview .ip-tag b {
+  color: #c7a16b;
+  font-weight: 600;
+  margin-right: 3px;
+}
+.t20-npc-sheet .item-preview .ip-tag--red {
+  background: #2a1515;
+  border-color: #c53131;
+  color: #ff7b7b;
+}
+.t20-npc-sheet .item-preview .ip-tag--circ {
+  background: #1a2a3a;
+  border-color: #4a7ba8;
+  color: #8ab5d8;
+}
+.t20-npc-sheet .item-preview .ip-desc {
+  background: #0e0e0e;
+  padding: 8px 10px;
+  border-radius: 3px;
+  line-height: 1.55;
+  color: #d0d0d0;
+  font-size: 12px;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid #252525;
+}
+.t20-npc-sheet .item-preview .ip-desc p {
+  margin: 0 0 6px 0;
+}
+.t20-npc-sheet .item-preview .ip-desc p:last-child {
+  margin-bottom: 0;
+}
+.t20-npc-sheet .item-preview .ip-desc ul {
+  margin: 4px 0;
+  padding-left: 20px;
+}
+.t20-npc-sheet .item-preview .ip-desc em {
+  color: #888;
+}
+.t20-npc-sheet .item-preview .ip-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+.t20-npc-sheet .item-preview .ip-actions button {
+  background: #1a1a1a;
+  color: #c7a16b;
+  border: 1px solid #c7a16b;
+  padding: 4px 10px;
+  font-size: 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s;
+  height: 26px;
+}
+.t20-npc-sheet .item-preview .ip-actions button:hover {
+  background: #c7a16b;
+  color: #1a1a1a;
+}
+.t20-npc-sheet .item-preview .ip-actions .ip-roll-arma {
+  border-color: #c53131;
+  color: #c53131;
+}
+.t20-npc-sheet .item-preview .ip-actions .ip-roll-arma:hover {
+  background: #c53131;
+  color: #fff;
+}
+
+
+/* ═════════════════════════════════════════════════════════════
+   GERENCIADOR MULTICLASSE (Dialog acionado pelo campo CLASSE)
+   ═════════════════════════════════════════════════════════════ */
+.t20-mcm-dialog .window-content,
+.t20-mcm-dialog .dialog-content {
+  background: #1a1a1a !important;
+  color: var(--T, #e6e6e6);
+  padding: 12px !important;
+}
+.t20-mcm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 480px;
+}
+.t20-mcm .mcm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--Gdd, #675946);
+  border-radius: var(--r, 4px);
+}
+.t20-mcm .mcm-total {
+  color: var(--T2, #b8b8b8);
+  font-size: 0.9rem;
+}
+.t20-mcm .mcm-total b {
+  color: var(--Gb, #ffdd99);
+  text-shadow: 0 0 6px rgba(199,161,107,0.5);
+  font-size: 1.05rem;
+}
+.t20-mcm .mcm-hint {
+  color: var(--T3, #a1a1a1);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+.t20-mcm .mcm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.t20-mcm .mcm-empty {
+  padding: 14px 10px;
+  color: var(--T4, #7b7b7b);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  background: rgba(0,0,0,0.25);
+  border: 1px dashed var(--Bd, rgba(92,92,92,0.5));
+  border-radius: var(--r, 4px);
+}
+.t20-mcm .mcm-row {
+  display: grid;
+  grid-template-columns: 24px 1.2fr 1.4fr 100px 24px;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid var(--Bd, rgba(92,92,92,0.3));
+  border-left: 3px solid var(--T5, #5c5c5c);
+  border-radius: var(--r, 4px);
+  transition: border-color 0.15s, background 0.15s;
+}
+.t20-mcm .mcm-row:hover {
+  border-color: var(--Gd, #816e54);
+  background: rgba(199,161,107,0.05);
+}
+.t20-mcm .mcm-row-principal {
+  border-left-color: var(--G, #c7a16b) !important;
+  background: rgba(199,161,107,0.1) !important;
+}
+.t20-mcm .mcm-star {
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.t20-mcm .mcm-nome {
+  color: var(--T, #e6e6e6);
+  font-weight: 600;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.t20-mcm .mcm-sub {
+  color: var(--Tv, #9a957b);
+  font-size: 0.82rem;
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.t20-mcm .mcm-sub-pick {
+  color: var(--T4, #7b7b7b);
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-style: italic;
+  text-decoration: underline dotted;
+}
+.t20-mcm .mcm-sub-pick:hover { color: var(--Gl, #cdaa7a); }
+.t20-mcm .mcm-nivel {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--Bd, rgba(92,92,92,0.3));
+  border-radius: var(--r, 4px);
+  padding: 2px 6px;
+}
+.t20-mcm .mcm-nivel span {
+  font-size: 0.72rem;
+  color: var(--T4, #7b7b7b);
+  letter-spacing: 0.05em;
+}
+.t20-mcm .mcm-nivel-input {
+  width: 42px !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  text-align: center !important;
+  color: var(--Gb, #ffdd99) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+}
+.t20-mcm .mcm-del {
+  color: var(--T5, #5c5c5c);
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.15s;
+}
+.t20-mcm .mcm-del:hover { color: var(--Rb, #d72f2f); }
+.t20-mcm .mcm-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+  border-top: 1px solid var(--Bd, rgba(92,92,92,0.3));
+}
+.t20-mcm .mcm-add {
+  background: var(--Rd, #651313);
+  color: #fff;
+  border: 1px solid var(--R, #a82020);
+  border-radius: var(--r, 4px);
+  padding: 7px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+.t20-mcm .mcm-add:hover {
+  background: var(--R, #a82020);
+  border-color: var(--Rb, #d72f2f);
+  box-shadow: 0 0 10px rgba(215,47,47,0.5);
+}
+
+/* Badge VARIANTE nos cards de subtipo */
+.sub-card-variante {
+  border-left: 3px solid var(--R, #a82020) !important;
+}
+.sub-variante-badge {
+  display: inline-block;
+  background: var(--Rd, #651313);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.08em;
+}
+
+/* Dica no picker de classe */
+.t20-compendium-picker .cp-hint {
+  padding: 6px 10px;
+  color: var(--T3, #a1a1a1);
+  font-size: 0.78rem;
+  font-style: italic;
+  background: rgba(168,32,32,0.08);
+  border-left: 2px solid var(--R, #a82020);
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+
+/* ═════════════════════════════════════════════════════════════
+   PLANO DE FUNDO FIRELINK
+   Path ABSOLUTO (systems/tormenta20/...) — o Foundry usa o mesmo
+   servindo assets da pasta do sistema, então funciona em body,
+   #pause, #setup etc. sem importar a hierarquia do caller.
+   ═════════════════════════════════════════════════════════════ */
+
+/* Fundo global do Foundry. Aplicado no <body> com system-tormenta20.
+   Fica atrás do canvas/cena: quando uma cena é ativada, ela cobre.
+   Quando não há cena, a Firelink aparece. */
+body.system-tormenta20 {
+  background-image: url("/systems/tormenta20/assets/firelink-bg.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+/* O wrapper #board normalmente é preto. Se não há cena, deixa transparente
+   pra revelar o fundo do body. Quando há cena, o canvas cobre. */
+body.system-tormenta20 #board {
+  background: transparent !important;
+}
+body.system-tormenta20 #board.no-scene {
+  background-image: url("/systems/tormenta20/assets/firelink-bg.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Tela de pausa: o Foundry v12+ exibe #pause com a logo "PAUSED" no centro.
+   Deixamos o overlay semi-transparente sobre o fundo do body. */
+body.system-tormenta20 #pause {
+  background: rgba(0,0,0,0.5) !important;
+}
+body.system-tormenta20 #pause img,
+body.system-tormenta20 #pause figure {
+  filter: drop-shadow(0 0 12px rgba(215,47,47,0.7)) drop-shadow(0 0 4px #000);
+}
+
+/* Tela de setup/login */
+body.system-tormenta20 #setup,
+body.system-tormenta20 #setup-menu,
+body.system-tormenta20.system-tormenta20 #setup-background {
+  background-image: url("/systems/tormenta20/assets/firelink-bg.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* ═════════════════════════════════════════════════════════════
+   DICE SO NICE & DICE TRAY — compatibilidade
+   NÃO sobrescrever layout dos módulos. Apenas:
+    1. Garantir que o canvas do DsN renderize em tela cheia
+    2. Não esconder elementos do Dice Tray
+    3. Permitir que o Dice Tray quebre linha se o chat for estreito
+    4. Dar tamanho mínimo pros ícones pra não ficarem cortados
+   ═════════════════════════════════════════════════════════════ */
+
+/* ── Dice So Nice ── */
+/* Canvas do DsN ocupa a tela inteira pra rolagem 3D ser visível */
+#dice-box-canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 1000 !important;
+}
+
+/* Card de rolagem no chat (resultados dos dados) */
+.chat-message .dice-roll,
+.chat-message .dice-result,
+.chat-message .dice-tooltip,
+.chat-message .dice-formula,
+.chat-message .dice-total {
+  opacity: 1;
+  visibility: visible;
+}
+.chat-message .dice-tooltip {
+  background: rgba(0,0,0,0.9);
+  color: var(--T, #e6e6e6);
+  border: 1px solid var(--Gd, #816e54);
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+.chat-message .dice-roll .dice-total {
+  background: rgba(168,32,32,0.18);
+  color: #fff;
+  border: 1px solid var(--Gd, #816e54);
+  font-weight: 800;
+}
+
+/* ── Dice Tray (dice-calculator) ── */
+/* IMPORTANTE: NÃO forçar display, layout ou estilo nos elementos
+   internos do módulo. Deixamos o módulo renderizar com a própria CSS.
+   Só garantimos que o container não seja comprimido/cortado. */
+
+/* Permite quebrar pra segunda linha se o chat for estreito — evita
+   que o botão Rolar seja cortado */
+.dice-tray__buttons,
+.dice-tray__roll,
+.dice-tray .dice-tray__math {
+  flex-wrap: wrap !important;
+}
+
+/* Garante que o container do dice-tray ocupa toda a largura disponível
+   do chat-form e não seja limitado por min-width de outros elementos */
+#chat-form .dice-tray,
+#chat-controls .dice-tray {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Icones do dice-tray — mantém o tamanho natural do módulo mas impede
+   que sejam esmagados abaixo do mínimo */
+.dice-tray .dice-tray__button {
+  min-width: 28px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Input de fórmula do dice-tray — mantém visível e editável */
+.dice-tray__input,
+.dice-tray input[type="text"] {
+  min-width: 40px !important;
+  color: var(--T, #e6e6e6) !important;
+  background: rgba(0,0,0,0.3) !important;
+}

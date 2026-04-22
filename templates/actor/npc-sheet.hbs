@@ -1,0 +1,354 @@
+<form class="{{cssClass}} t20-npc-sheet" autocomplete="off">
+
+  {{!-- ═══════════ HEADER ═══════════ --}}
+  <header class="npc-header">
+    <div class="npc-hdr-portrait">
+      <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    </div>
+    <div class="npc-hdr-info">
+      <div class="npc-name-row">
+        <input class="npc-name" name="name" type="text" value="{{actor.name}}" placeholder="Nome do NPC" />
+        <button type="button" class="statblock-import-btn" title="Importar Statblock do Livro Básico T20">
+          <i class="fas fa-file-import"></i> Importar
+        </button>
+      </div>
+      <div class="npc-hdr-row">
+        <div class="npc-hm">
+          <label>ND</label>
+          <select name="system.nd" class="npc-nd">
+            {{#each NDS as |nd|}}
+              <option value="{{nd}}" {{#if (eq nd ../system.nd)}}selected{{/if}}>{{nd}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="npc-hm">
+          <label>Tipo</label>
+          <select name="system.biografia.tipo">
+            {{#each TIPOS as |t|}}
+              <option value="{{t}}" {{#if (eq t ../system.biografia.tipo)}}selected{{/if}}>{{t}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="npc-hm">
+          <label>Tamanho</label>
+          <select name="system.biografia.tamanho">
+            {{#each SIZES as |s|}}
+              <option value="{{s}}" {{#if (eq s ../system.biografia.tamanho)}}selected{{/if}}>{{s}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="npc-hm npc-hm--xs">
+          <label>Desloc.</label>
+          <input type="number" name="system.biografia.deslocamento" value="{{system.biografia.deslocamento}}" />
+        </div>
+        <div class="npc-hm npc-hm--xs">
+          <label>XP <a class="xp-auto-btn" title="Auto (pelo ND)"><i class="fas fa-wand-sparkles"></i></a></label>
+          <input type="number" name="system.xp" value="{{system.xp}}" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- ═══════════ RECURSOS (PV / PM / DEF / CD / INIC) ═══════════ --}}
+  <section class="npc-res-row">
+    <div class="npc-res npc-res--pv">
+      <div class="nres-label"><i class="fas fa-heart"></i> PV</div>
+      <div class="nres-nums">
+        <input type="number" name="system.pv.value" value="{{system.pv.value}}" class="nres-cur" />
+        <span>/</span>
+        <input type="number" name="system.pv.max" value="{{system.pv.max}}" class="nres-max" />
+        <a class="npc-autofill-hp-btn" title="Restaurar ao máximo"><i class="fas fa-rotate"></i></a>
+      </div>
+      <div class="nres-bar"><div class="nres-fill nres-fill--pv" style="width:{{#if system.pv.max}}{{math system.pv.value '/' system.pv.max '*' 100}}%{{else}}0%{{/if}}"></div></div>
+    </div>
+
+    <div class="npc-res npc-res--pm">
+      <div class="nres-label"><i class="fas fa-star"></i> PM</div>
+      <div class="nres-nums">
+        <input type="number" name="system.pm.value" value="{{system.pm.value}}" class="nres-cur" />
+        <span>/</span>
+        <input type="number" name="system.pm.max" value="{{system.pm.max}}" class="nres-max" />
+      </div>
+      <div class="nres-bar"><div class="nres-fill nres-fill--pm" style="width:{{#if system.pm.max}}{{math system.pm.value '/' system.pm.max '*' 100}}%{{else}}0%{{/if}}"></div></div>
+    </div>
+
+    <div class="npc-stat-box">
+      <div class="nsb-val">{{system.defesa.total}}</div>
+      <div class="nsb-lbl"><i class="fas fa-shield-halved"></i> DEFESA</div>
+      <div class="nsb-sub">
+        base <input type="number" name="system.defesa.base" value="{{system.defesa.base}}" class="nsb-mini" />
+        + <input type="number" name="system.defesa.outros" value="{{system.defesa.outros}}" class="nsb-mini" title="outros modificadores" />
+      </div>
+    </div>
+
+    <div class="npc-stat-box">
+      <div class="nsb-val">{{system.defesa.cd}}</div>
+      <div class="nsb-lbl"><i class="fas fa-dice-d20"></i> CD</div>
+      <div class="nsb-sub">
+        <select name="system.magia.atributoChave" class="nsb-atr">
+          <option value="int" {{#if (eq system.magia.atributoChave 'int')}}selected{{/if}}>Int</option>
+          <option value="sab" {{#if (eq system.magia.atributoChave 'sab')}}selected{{/if}}>Sab</option>
+          <option value="car" {{#if (eq system.magia.atributoChave 'car')}}selected{{/if}}>Car</option>
+        </select>
+        + <input type="number" name="system.bonusCD" value="{{system.bonusCD}}" class="nsb-mini" title="Bônus de CD manual" />
+      </div>
+    </div>
+
+    <div class="npc-stat-box npc-stat-init roll-iniciativa" title="Rolar Iniciativa">
+      <div class="nsb-val nsb-red">{{signedNum system.pericias.iniciativa.total}}</div>
+      <div class="nsb-lbl"><i class="fas fa-bolt"></i> INIC.</div>
+    </div>
+  </section>
+
+  {{!-- ═══════════ ATRIBUTOS ═══════════ --}}
+  <section class="npc-atr-row">
+    {{#each system.atributos as |atr key|}}
+    <div class="natr">
+      <span class="natr-lbl">{{upper key}}</span>
+      <div class="natr-mod roll-atributo" data-atributo="{{key}}" title="Rolar {{upper key}}">{{signedNum atr.total}}</div>
+      <input type="number" class="natr-val" name="system.atributos.{{key}}.value" value="{{atr.value}}" />
+    </div>
+    {{/each}}
+  </section>
+
+  {{!-- ═══════════ TABS ═══════════ --}}
+  <nav class="npc-tabs sheet-tabs">
+    <a class="item" data-tab="stats"><i class="fas fa-chart-simple"></i> Perícias</a>
+    <a class="item" data-tab="combate"><i class="fas fa-swords"></i> Ataques</a>
+    <a class="item" data-tab="acoes"><i class="fas fa-bolt"></i> Ações</a>
+    <a class="item" data-tab="magias"><i class="fas fa-hat-wizard"></i> Magias</a>
+    <a class="item" data-tab="notas"><i class="fas fa-book"></i> Bio</a>
+  </nav>
+
+  <section class="npc-body sheet-body">
+
+    {{!-- ─── TAB PERÍCIAS ─── --}}
+    <div class="tab" data-tab="stats">
+      <div class="npc-skills-hdr">
+        <span>Perícias</span>
+        <button type="button" class="pericia-toggle-btn"><i class="fas fa-gear"></i> Editar visíveis</button>
+      </div>
+
+      <div class="npc-skills-grid">
+        {{#each periciasVisiveis as |p|}}
+          <div class="npc-sk">
+            <span class="sk-name roll-pericia" data-pericia="{{p.key}}" title="Rolar {{p.label}}">
+              {{#if p.treinada}}<i class="fas fa-star sk-star"></i>{{/if}}
+              {{p.label}}
+            </span>
+            <span class="sk-mod">{{signedNum p.total}}</span>
+            <input type="number" class="sk-bonus" name="system.pericias.{{p.key}}.bonus" value="{{p.bonus}}" title="Bônus extra" />
+            <label class="sk-train" title="Treinada">
+              <input type="checkbox" name="system.pericias.{{p.key}}.treinada" {{checked p.treinada}} />
+            </label>
+          </div>
+        {{else}}
+          <div class="npc-empty">Nenhuma perícia configurada. Clique em "Editar visíveis".</div>
+        {{/each}}
+      </div>
+
+      {{!-- Editor de visibilidade (dropdown colapsável) --}}
+      <div class="pericia-editor">
+        <div class="pe-title">Escolha quais perícias aparecem na ficha:</div>
+        <div class="pe-grid">
+          {{#each todasPericias as |p|}}
+            <label class="pe-item">
+              <input type="checkbox" class="pericia-mostrar" data-pericia="{{p.key}}" {{checked p.mostrar}} />
+              <span>{{p.label}}</span>
+            </label>
+          {{/each}}
+        </div>
+      </div>
+
+      {{!-- Sentidos + Resistências --}}
+      <div class="npc-sense-row">
+        <div class="nsr-box">
+          <div class="nsr-lbl">Sentidos Especiais</div>
+          <input type="text" name="system.sentidos" value="{{system.sentidos}}" placeholder="Ex: Visão no escuro 18m, Faro..." />
+        </div>
+        <div class="nsr-box">
+          <div class="nsr-lbl">Tesouro</div>
+          <input type="text" name="system.tesouro" value="{{system.tesouro}}" placeholder="Nenhum / Padrão / Dobrado..." />
+        </div>
+      </div>
+
+      <div class="npc-res-list">
+        <div class="nrl-hdr">
+          <span><i class="fas fa-shield-heart"></i> Resistências & Especiais</span>
+          <button type="button" class="sb-res-add"><i class="fas fa-plus"></i></button>
+        </div>
+        <div class="nrl-items">
+          {{#each resistencias as |r idx|}}
+            <span class="nrl-item">
+              {{r}}
+              <a class="res-remove" data-idx="{{idx}}" title="Remover"><i class="fas fa-xmark"></i></a>
+            </span>
+          {{else}}
+            <span class="npc-empty-inline">Nenhuma</span>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    {{!-- ─── TAB ATAQUES ─── --}}
+    <div class="tab" data-tab="combate">
+      <div class="npc-section-hdr">
+        <span><i class="fas fa-swords"></i> Ataques</span>
+        <div class="npc-section-actions">
+          <button type="button" class="natural-attack-create" title="Criar ataque natural (garra, mordida, etc.)"><i class="fas fa-paw-claws"></i> Natural</button>
+          <button type="button" class="item-create" data-type="arma"><i class="fas fa-plus"></i> Arma</button>
+        </div>
+      </div>
+      <div class="item-list">
+        {{#each armas as |a|}}
+          <div class="item {{#if a.system.ataqueNatural}}item--natural{{/if}}" data-item-id="{{a._id}}">
+            <img src="{{a.img}}" class="item-img" />
+            <span class="item-name item-name-toggle" title="Clique para ver descrição">
+              {{#if a.system.ataqueNatural}}<i class="fas fa-paw-claws natural-icon" title="Ataque Natural (bônus direto)"></i>{{/if}}
+              {{a.name}}
+              {{#if (gt a.system.numAtaques 1)}}<span class="item-multi">×{{a.system.numAtaques}}</span>{{/if}}
+            </span>
+            <span class="item-tag">{{a.system.dano}}</span>
+            {{#if a.system.ataqueNatural}}
+              <span class="item-tag item-tag--atk">{{signedNum a.system.bonusAtaque}} atk</span>
+            {{/if}}
+            <span class="item-tag">{{a.system.tipo}}</span>
+            <span class="item-tag">{{a.system.critico}}</span>
+            <div class="item-actions">
+              <a class="roll-arma" title="Rolar ataque"><i class="fas fa-dice-d20"></i></a>
+              <a class="item-clone" title="Clonar"><i class="fas fa-clone"></i></a>
+              <a class="item-edit" title="Editar"><i class="fas fa-pen"></i></a>
+              <a class="item-delete" title="Remover"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        {{else}}
+          <div class="npc-empty">Nenhum ataque. Use "Natural" para garras/mordidas ou "Arma" para itens do compêndio.</div>
+        {{/each}}
+      </div>
+
+      {{!-- Armaduras equipáveis (opcional p/ NPCs usando armadura do livro) --}}
+      <div class="npc-section-hdr">
+        <span><i class="fas fa-shield"></i> Armadura</span>
+        <button type="button" class="item-create" data-type="armadura"><i class="fas fa-plus"></i> Armadura</button>
+      </div>
+      <div class="item-list">
+        {{#each armaduras as |a|}}
+          <div class="item" data-item-id="{{a._id}}">
+            <img src="{{a.img}}" class="item-img" />
+            <span class="item-name item-name-toggle" title="Clique para ver descrição">{{a.name}}</span>
+            <span class="item-tag">+{{a.system.defesa}}</span>
+            <span class="item-tag">{{a.system.tipo}}</span>
+            <div class="item-actions">
+              <a class="item-equip {{#if a.system.equipada}}equipped{{/if}}" title="{{#if a.system.equipada}}Desequipar{{else}}Equipar{{/if}}">
+                <i class="fas {{#if a.system.equipada}}fa-toggle-on{{else}}fa-toggle-off{{/if}}"></i>
+              </a>
+              <a class="item-edit" title="Editar"><i class="fas fa-pen"></i></a>
+              <a class="item-delete" title="Remover"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    {{!-- ─── TAB AÇÕES (poderes + habilidades) ─── --}}
+    <div class="tab" data-tab="acoes">
+      <div class="npc-section-hdr">
+        <span><i class="fas fa-bolt"></i> Poderes</span>
+        <button type="button" class="item-create" data-type="poder"><i class="fas fa-plus"></i> Poder</button>
+      </div>
+      <div class="item-list">
+        {{#each poderes as |p|}}
+          <div class="item" data-item-id="{{p._id}}">
+            <img src="{{p.img}}" class="item-img" />
+            <span class="item-name item-name-toggle" title="Clique para ver descrição">{{p.name}}</span>
+            {{#if p.system.tipo}}<span class="item-tag">{{p.system.tipo}}</span>{{/if}}
+            {{#if p.system.custoPM}}<span class="item-tag">{{p.system.custoPM}} PM</span>{{/if}}
+            <div class="item-actions">
+              <a class="item-use" title="Usar"><i class="fas fa-play"></i></a>
+              <a class="item-edit" title="Editar"><i class="fas fa-pen"></i></a>
+              <a class="item-delete" title="Remover"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        {{else}}
+          <div class="npc-empty">Nenhum poder.</div>
+        {{/each}}
+      </div>
+
+      <div class="npc-section-hdr">
+        <span><i class="fas fa-wand-sparkles"></i> Habilidades Especiais</span>
+        <button type="button" class="item-create" data-type="habilidade"><i class="fas fa-plus"></i> Habilidade</button>
+      </div>
+      <div class="item-list">
+        {{#each habilidades as |h|}}
+          <div class="item" data-item-id="{{h._id}}">
+            <img src="{{h.img}}" class="item-img" />
+            <span class="item-name item-name-toggle" title="Clique para ver descrição">{{h.name}}</span>
+            {{#if h.system.tipo}}<span class="item-tag">{{h.system.tipo}}</span>{{/if}}
+            <div class="item-actions">
+              <a class="item-use" title="Mostrar no chat"><i class="fas fa-comment"></i></a>
+              <a class="item-edit" title="Editar"><i class="fas fa-pen"></i></a>
+              <a class="item-delete" title="Remover"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        {{else}}
+          <div class="npc-empty">Nenhuma habilidade.</div>
+        {{/each}}
+      </div>
+    </div>
+
+    {{!-- ─── TAB MAGIAS ─── --}}
+    <div class="tab" data-tab="magias">
+      {{#each magiasPorCirculo as |circ|}}
+        <div class="npc-section-hdr">
+          <span><i class="fas fa-hat-wizard"></i> Círculo {{circ.circulo}}</span>
+          <button type="button" class="item-create" data-type="magia" data-circle="{{circ.circulo}}"><i class="fas fa-plus"></i> Magia</button>
+        </div>
+        <div class="item-list">
+          {{#each circ.magias as |m|}}
+            <div class="item" data-item-id="{{m._id}}">
+              <img src="{{m.img}}" class="item-img" />
+              <span class="item-name item-name-toggle" title="Clique para ver descrição">{{m.name}}</span>
+              <span class="item-tag">{{m.system.tipo}}</span>
+              {{#if m.system.custoPM}}<span class="item-tag">{{m.system.custoPM}} PM</span>{{/if}}
+              <div class="item-actions">
+                <a class="item-use" title="Conjurar"><i class="fas fa-play"></i></a>
+                <a class="item-edit" title="Editar"><i class="fas fa-pen"></i></a>
+                <a class="item-delete" title="Remover"><i class="fas fa-trash"></i></a>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+
+      {{!-- Sempre disponível: adicionar magia de qualquer círculo --}}
+      {{#unless magiasPorCirculo}}
+      <div class="npc-empty">Nenhuma magia. Adicione abaixo.</div>
+      {{/unless}}
+
+      <div class="npc-circles-add">
+        <button type="button" class="item-create" data-type="magia" data-circle="1">+ 1°</button>
+        <button type="button" class="item-create" data-type="magia" data-circle="2">+ 2°</button>
+        <button type="button" class="item-create" data-type="magia" data-circle="3">+ 3°</button>
+        <button type="button" class="item-create" data-type="magia" data-circle="4">+ 4°</button>
+        <button type="button" class="item-create" data-type="magia" data-circle="5">+ 5°</button>
+      </div>
+    </div>
+
+    {{!-- ─── TAB BIO ─── --}}
+    <div class="tab" data-tab="notas">
+      <div class="npc-bio-row">
+        <div class="npc-bio-col">
+          <label>Facção</label>
+          <input type="text" name="system.biografia.faccao" value="{{system.biografia.faccao}}" />
+        </div>
+        <div class="npc-bio-col">
+          <label>Moral / Tendência</label>
+          <input type="text" name="system.biografia.moral" value="{{system.biografia.moral}}" />
+        </div>
+      </div>
+      <label>Descrição / Táticas</label>
+      <textarea name="system.biografia.descricao" rows="14" placeholder="Descrição, táticas de combate, histórico...">{{system.biografia.descricao}}</textarea>
+    </div>
+
+  </section>
+</form>

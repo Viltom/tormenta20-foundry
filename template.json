@@ -1,0 +1,256 @@
+{
+  "Actor": {
+    "types": [
+      "personagem",
+      "npc"
+    ],
+    "personagem": {
+      "biografia": {
+        "nome": "",
+        "raca": "",
+        "classe": "",
+        "nivel": 1,
+        "divindade": "",
+        "origem": "",
+        "distincao": "",
+        "tamanho": "Médio",
+        "deslocamento": 9,
+        "descricao": "",
+        "subclasse": "",
+        "classes": []
+      },
+      "atributos": {
+        "for": { "value": 0, "bonus": 0, "total": 0 },
+        "des": { "value": 0, "bonus": 0, "total": 0 },
+        "con": { "value": 0, "bonus": 0, "total": 0 },
+        "int": { "value": 0, "bonus": 0, "total": 0 },
+        "sab": { "value": 0, "bonus": 0, "total": 0 },
+        "car": { "value": 0, "bonus": 0, "total": 0 }
+      },
+      "pv": { "value": 0, "max": 0, "temp": 0, "bonus": 0 },
+      "pm": { "value": 0, "max": 0, "bonus": 0 },
+      "defesa": {
+        "base": 10, "armadura": 0, "escudo": 0, "outros": 0,
+        "total": 10, "penalidade": 0
+      },
+      "pericias": {
+        "acrobacia":     { "atributo": "des", "treinada": false, "bonus": 0, "total": 0 },
+        "adestramento":  { "atributo": "car", "treinada": false, "bonus": 0, "total": 0 },
+        "atletismo":     { "atributo": "for", "treinada": false, "bonus": 0, "total": 0 },
+        "atuacao":       { "atributo": "car", "treinada": false, "bonus": 0, "total": 0 },
+        "cavalgar":      { "atributo": "des", "treinada": false, "bonus": 0, "total": 0 },
+        "conhecimento":  { "atributo": "int", "treinada": false, "bonus": 0, "total": 0 },
+        "cura":          { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0 },
+        "diplomacia":    { "atributo": "car", "treinada": false, "bonus": 0, "total": 0 },
+        "enganacao":     { "atributo": "car", "treinada": false, "bonus": 0, "total": 0 },
+        "fortitude":     { "atributo": "con", "treinada": false, "bonus": 0, "total": 0 },
+        "furtividade":   { "atributo": "des", "treinada": false, "bonus": 0, "total": 0 },
+        "guerra":        { "atributo": "int", "treinada": false, "bonus": 0, "total": 0 },
+        "iniciativa":    { "atributo": "des", "treinada": false, "bonus": 0, "total": 0 },
+        "intimidacao":   { "atributo": "car", "treinada": false, "bonus": 0, "total": 0 },
+        "intuicao":      { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0 },
+        "investigacao":  { "atributo": "int", "treinada": false, "bonus": 0, "total": 0 },
+        "jogatina":      { "atributo": "car", "treinada": false, "bonus": 0, "total": 0 },
+        "ladinagem":     { "atributo": "des", "treinada": false, "bonus": 0, "total": 0 },
+        "luta":          { "atributo": "for", "treinada": false, "bonus": 0, "total": 0 },
+        "misticismo":    { "atributo": "int", "treinada": false, "bonus": 0, "total": 0 },
+        "nobreza":       { "atributo": "int", "treinada": false, "bonus": 0, "total": 0 },
+        "oficio":        { "atributo": "int", "treinada": false, "bonus": 0, "total": 0 },
+        "percepcao":     { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0 },
+        "pilotagem":     { "atributo": "des", "treinada": false, "bonus": 0, "total": 0 },
+        "pontaria":      { "atributo": "des", "treinada": false, "bonus": 0, "total": 0 },
+        "reflexos":      { "atributo": "des", "treinada": false, "bonus": 0, "total": 0 },
+        "religiao":      { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0 },
+        "sobrevivencia": { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0 },
+        "vontade":       { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0 }
+      },
+      "detalhes": {
+        "xp": 0,
+        "dinheiro": { "tb": 0, "to": 0 }
+      },
+      "bonusCD": 0,
+      "resistencias": "",
+      "global": {
+        "rolagem": 0,
+        "ataque": 0,
+        "pericias": 0,
+        "resistencias": 0,
+        "dano": 0
+      },
+      "condicoes": {
+        "abalado": false, "agarrado": false, "alquebrado": false,
+        "apavorado": false, "atordoado": false, "caido": false,
+        "cego": false, "confuso": false, "debilitado": false,
+        "desprevenido": false, "doente": false, "emChamas": false,
+        "enfeiticado": false, "enjoado": false, "enredado": false,
+        "envenenado": false, "esmorecido": false, "exausto": false,
+        "fascinado": false, "fatigado": false, "fraco": false,
+        "frustrado": false, "imovel": false, "inconsciente": false,
+        "indefeso": false, "lento": false, "ofuscado": false,
+        "paralizado": false, "pasmo": false, "petrificacao": false,
+        "sangrando": false, "surdo": false, "surpreendido": false,
+        "vulneravel": false
+      },
+      "magia": {
+        "atributoChave": "int"
+      },
+      "resistenciasList": []
+    },
+    "npc": {
+      "biografia": {
+        "nome": "",
+        "tipo": "Humanoide",
+        "tamanho": "Médio",
+        "deslocamento": 9,
+        "descricao": "",
+        "faccao": "",
+        "moral": ""
+      },
+      "nd": "1",
+      "xp": 0,
+      "atributos": {
+        "for": { "value": 0, "bonus": 0, "total": 0 },
+        "des": { "value": 0, "bonus": 0, "total": 0 },
+        "con": { "value": 0, "bonus": 0, "total": 0 },
+        "int": { "value": 0, "bonus": 0, "total": 0 },
+        "sab": { "value": 0, "bonus": 0, "total": 0 },
+        "car": { "value": 0, "bonus": 0, "total": 0 }
+      },
+      "pv": { "value": 0, "max": 0, "temp": 0, "bonus": 0 },
+      "pm": { "value": 0, "max": 0, "bonus": 0 },
+      "defesa": {
+        "base": 10,
+        "armadura": 0,
+        "outros": 0,
+        "total": 10,
+        "cd": 10
+      },
+      "pericias": {
+        "acrobacia":     { "atributo": "des", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "adestramento":  { "atributo": "car", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "atletismo":     { "atributo": "for", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "atuacao":       { "atributo": "car", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "cavalgar":      { "atributo": "des", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "conhecimento":  { "atributo": "int", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "cura":          { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "diplomacia":    { "atributo": "car", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "enganacao":     { "atributo": "car", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "fortitude":     { "atributo": "con", "treinada": false, "bonus": 0, "total": 0, "mostrar": true },
+        "furtividade":   { "atributo": "des", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "guerra":        { "atributo": "int", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "iniciativa":    { "atributo": "des", "treinada": false, "bonus": 0, "total": 0, "mostrar": true },
+        "intimidacao":   { "atributo": "car", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "intuicao":      { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "investigacao":  { "atributo": "int", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "jogatina":      { "atributo": "car", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "ladinagem":     { "atributo": "des", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "luta":          { "atributo": "for", "treinada": false, "bonus": 0, "total": 0, "mostrar": true },
+        "misticismo":    { "atributo": "int", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "nobreza":       { "atributo": "int", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "oficio":        { "atributo": "int", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "percepcao":     { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0, "mostrar": true },
+        "pilotagem":     { "atributo": "des", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "pontaria":      { "atributo": "des", "treinada": false, "bonus": 0, "total": 0, "mostrar": true },
+        "reflexos":      { "atributo": "des", "treinada": false, "bonus": 0, "total": 0, "mostrar": true },
+        "religiao":      { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "sobrevivencia": { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0, "mostrar": false },
+        "vontade":       { "atributo": "sab", "treinada": false, "bonus": 0, "total": 0, "mostrar": true }
+      },
+      "bonusCD": 0,
+      "magia": {
+        "atributoChave": "int"
+      },
+      "resistenciasList": [],
+      "sentidos": "",
+      "tesouro": "Nenhum",
+      "global": {
+        "rolagem": 0,
+        "ataque": 0,
+        "pericias": 0,
+        "resistencias": 0,
+        "dano": 0
+      },
+      "condicoes": {
+        "abalado": false, "agarrado": false, "alquebrado": false,
+        "apavorado": false, "atordoado": false, "caido": false,
+        "cego": false, "confuso": false, "debilitado": false,
+        "desprevenido": false, "doente": false, "emChamas": false,
+        "enfeiticado": false, "enjoado": false, "enredado": false,
+        "envenenado": false, "esmorecido": false, "exausto": false,
+        "fascinado": false, "fatigado": false, "fraco": false,
+        "frustrado": false, "imovel": false, "inconsciente": false,
+        "indefeso": false, "lento": false, "ofuscado": false,
+        "paralizado": false, "pasmo": false, "petrificacao": false,
+        "sangrando": false, "surdo": false, "surpreendido": false,
+        "vulneravel": false
+      }
+    }
+  },
+  "Item": {
+    "types": [
+      "poder", "magia", "arma", "armadura",
+      "equipamento", "habilidade", "invencao"
+    ],
+    "poder": {
+      "descricao": "", "tipo": "", "requisitos": "",
+      "acao": "", "custoPM": 0
+    },
+    "magia": {
+      "descricao": "", "tipo": "", "circulo": 1,
+      "escola": "", "execucao": "", "alcance": "",
+      "alvo": "", "area": "", "duracao": "",
+      "resistencia": "", "custoPM": 0,
+      "dano": "",
+      "tipoDano": ""
+    },
+    "arma": {
+      "descricao": "", "dano": "", "critico": "20/x2",
+      "tipo": "", "alcance": "", "grupo": "",
+      "empunhadura": "", "propriedades": "",
+      "preco": 0, "espacos": 1, "bonus": 0,
+      "equipada": false, "material": "", "melhorias": "",
+      "bonusCD": 0, "bonusAtaque": 0, "bonusDano": 0,
+      "ataqueNatural": false, "numAtaques": 1, "penalidadeMultiplos": 0,
+      "ignoraAtributoDano": false,
+      "mCerteira": false, "mPungente": false, "mCruel": false,
+      "mAtroz": false, "mEquilibrada": false, "mHarmonizada": false,
+      "mInjecao": false, "mMacica": false, "mPrecisa": false,
+      "mMira": false, "mMacabro": false,
+      "mBanhado": false, "mCravejado": false, "mDiscreto": false
+    },
+    "armadura": {
+      "descricao": "", "defesa": 0, "penalidade": 0,
+      "tipo": "", "preco": 0, "espacos": 2,
+      "equipada": false, "material": "", "melhorias": "",
+      "bonusCD": 0,
+      "mAjustada": false, "mSobMedida": false, "mDelicada": false,
+      "mPolida": false, "mReforcada": false, "mSelada": false,
+      "mEspinhosa": false, "mBanhado": false, "mCravejado": false,
+      "mDiscreto": false
+    },
+    "equipamento": {
+      "descricao": "", "categoria": "", "quantidade": 1,
+      "peso": 0, "preco": "", "espacos": 1, "bonusCD": 0
+    },
+    "habilidade": {
+      "descricao": "", "tipo": "", "fonte": ""
+    },
+    "invencao": {
+      "descricao": "",
+      "magiaSim": "",
+      "circuloMagia": 1,
+      "custoPMmagia": 0,
+      "custoFab": 0,
+      "cdAtivacao": 15,
+      "ativacoesHoje": 0,
+      "tipoPorte": "empunhada",
+      "status": "funcional",
+      "pvMax": 0,
+      "pvAtual": 0,
+      "defesa": 15,
+      "rd": 5,
+      "efeito": "",
+      "notas": ""
+    }
+  }
+}
