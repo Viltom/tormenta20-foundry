@@ -146,5 +146,5 @@
   "socket": false,
   "url": "https://github.com/Viltom/tormenta20-foundry",
   "manifest": "https://github.com/Viltom/tormenta20-foundry/releases/latest/download/system.json",
-  "download": "https://github.com/Viltom/tormenta20-foundry/releases/latest/download/tormenta20.zip"
+  "download": "https://github.com/Viltom/tormenta20-foundry/releases/download/v0.8.0/tormenta20.zip"
 }
