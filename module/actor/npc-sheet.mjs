@@ -4,6 +4,7 @@
 // ========================================================
 
 import { parseStatblock } from "../statblock-parser.mjs";
+import { rollT20Initiative } from "../combat.mjs";
 
 export class T20NpcSheet extends ActorSheet {
 
@@ -175,13 +176,8 @@ export class T20NpcSheet extends ActorSheet {
 
   async _onRollIniciativa(event) {
     event.preventDefault();
-    const t = this.actor.system.pericias.iniciativa?.total ?? 0;
-    const roll = new Roll("1d20+@t", { t });
-    await roll.evaluate();
-    roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: `<strong>Iniciativa</strong> (${t >= 0 ? "+" : ""}${t})`,
-    });
+    // Integra com Combat Tracker quando NPC está em combate; senão, vai pro chat.
+    return rollT20Initiative(this.actor);
   }
 
   // ================================================================

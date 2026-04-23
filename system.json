@@ -2,7 +2,7 @@
   "id": "tormenta20",
   "title": "Tormenta 20",
   "description": "Sistema de RPG Tormenta 20 para Foundry VTT.",
-  "version": "0.7.4",
+  "version": "0.8.0",
   "compatibility": {
     "minimum": "12",
     "verified": "14",
@@ -145,6 +145,6 @@
   "secondaryTokenAttribute": "pm",
   "socket": false,
   "url": "https://github.com/Viltom/tormenta20-foundry",
-  "manifest": "https://github.com/Viltom/tormenta20-foundry/releases/latest/download/system.json",
-  "download": "https://github.com/Viltom/tormenta20-foundry/releases/download/v0.7.4/tormenta20.zip"
+  "manifest": "https://raw.githubusercontent.com/Viltom/tormenta20-foundry/main/tormenta20/system.json",
+  "download": "https://github.com/Viltom/tormenta20-foundry/releases/latest/download/tormenta20.zip"
 }

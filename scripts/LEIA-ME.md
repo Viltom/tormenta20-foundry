@@ -23,6 +23,82 @@ para popular os compêndios.
 16. `19-importar-poderes-extras.js`
 17. `20-importar-distincoes.js`
 18. `21-importar-bestiario.js`  ← bestiário de NPCs (139 criaturas)
+19. `22-corrigir-magias-do-compendio.js`  ← correções em magias existentes (opcional)
+20. `23-atualizar-magias-classes.js`  ← **v0.8.0**: atualiza descrições das 6 classes conjuradoras (ler "Novidades da v0.8.0")
+
+## Novidades da v0.8.0 (Integração de Combate + Condições Visuais + Magias por Nível)
+
+### 1. Iniciativa integrada ao Combat Tracker
+
+A rolagem de iniciativa agora conversa com a aba de **Combat Encounters** (rodapé
+direito do Foundry) em ambas as direções:
+
+- `CONFIG.Combat.initiative.formula = "1d20 + @pericias.iniciativa.total"` é
+  registrado no `init` hook — o botão `⟳ Roll All` / `Roll NPCs` do tracker
+  passa a usar a perícia Iniciativa do T20 (mod Des + treino + bônus), em vez
+  do fallback genérico `1d20`.
+- O botão **🎯 Rolar Iniciativa** dentro da ficha (PJ e NPC) detecta se o
+  ator está em `game.combat` e, se sim, preenche a coluna de iniciativa no
+  tracker via `Combat#rollInitiative`. Se não houver combate ativo, cai pro
+  chat como antes.
+- Arrastar um token pra o tracker, ou o próprio Foundry iniciando turnos,
+  usa a fórmula correta.
+
+Fluxo lógico (tradução Roll20 → Foundry): no Roll20 a iniciativa era um
+botão de macro que empurrava pro "Turn Order" via API. No Foundry a gente
+só precisa registrar `CONFIG.Combat.initiative` e o core faz o resto —
+o `Actor#getRollData()` já expõe `pericias.iniciativa.total` e o mecanismo
+nativo do tracker resolve `@pericias.iniciativa.total` na fórmula.
+
+### 2. Condições como Status Effects (ícones no token + HUD)
+
+As 34 condições T20 (`abalado`, `apavorado`, `em chamas`, `sangrando`, …)
+agora são **`CONFIG.statusEffects` oficiais do Foundry**, com ícones nativos
+`icons/svg/*`. Consequências:
+
+- Ícones aparecem **sobre o token** na cena quando a condição está ativa.
+- O **HUD do token** (clique direito no token) mostra a paleta das 34
+  condições — você pode aplicar/remover clicando nos ícones.
+- A lista no **Combat Tracker** exibe os ícones de condição ao lado do nome.
+
+**Sincronização bidirecional (sem loop):**
+- Marcar o checkbox na aba "Condições" da ficha → `updateActor` hook
+  aplica/remove o status effect → token exibe o ícone.
+- Clicar no ícone no HUD do token → `create/deleteActiveEffect` hooks
+  refletem o estado em `system.condicoes.<key>` → checkbox na ficha
+  atualiza sozinho.
+
+**Importante sobre a mecânica:** os ActiveEffects criados pelas condições
+T20 são **marcadores visuais** (sem `changes`). A lógica numérica (-2 em
+perícias, -5 em atributos etc.) continua em `prepareDerivedData` lendo
+`system.condicoes.<key>` — não há dupla aplicação de modificadores.
+
+Se você tem personagens antigos com condições já marcadas na ficha e quer
+"propagar" os ícones pro token sem precisar mexer em cada checkbox, rode
+no console F12:
+```js
+await game.tormenta20.syncAllConditions(actor);  // ou canvas.tokens.controlled[0].actor
+```
+
+### 3. Magias conhecidas por nível nas 6 classes conjuradoras
+
+Cada classe conjuradora agora descreve explicitamente na descrição:
+
+- **Arcanista**: 3 magias no 1º, +1/nv (Feiticeiro só ímpares; Mago começa
+  com 4 e ganha +1 por novo círculo).
+- **Bardo**: 2 magias no 1º, +1 por nível **par** (2º, 4º, 6º…).
+- **Clérigo**: 3 magias no 1º, +1/nv.
+- **Druida**: 2 magias no 1º, +1 por nível **par**.
+- **Frade** (Deuses de Arton): 3 magias no 1º, +1/nv.
+- **Místico** (Classes Novas): 3 magias no 1º, +1/nv (até 4º círculo).
+
+Se você já tem o compêndio `tormenta20.classes` importado e **não** quer
+reimportar tudo, rode apenas `23-atualizar-magias-classes.js` no console
+F12. Idempotente, só mexe em `system.descricao` e `system.acao` dos itens
+das 6 classes listadas acima.
+
+Se você vai instalar o sistema do zero, os scripts 10 e 14 já vêm com
+essas descrições atualizadas — o script 23 é desnecessário nesse caso.
 
 ## Novidades da v0.7.0 (Multiclasse + Variantes como Subclasses + Firelink)
 

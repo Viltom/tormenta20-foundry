@@ -4,10 +4,10 @@ const DATA = [
   {
     "name": "Arcanista",
     "system": {
-      "descricao": "PV: 8 (+2/nível). PM: 6/nível.\nAtributo-chave: Inteligência ou Carisma.\nPerícias fixas: misticismo, vontade + 2 à escolha.\nLista: conhecimento, diplomacia, enganacao, guerra, iniciativa, intimidacao, intuicao, investigacao, nobreza, oficio, percepcao.\nProficiências: Nenhuma armadura, armas simples.\nSubtipos: Bruxo, Feiticeiro, Mago.\n• Bruxo: Lança magias através de um foco (varinha, cajado). Atributo-chave: Inteligência.\n• Feiticeiro: Lança magias através de poder inato no sangue. Escolha uma linhagem. Atributo-chave: Carisma. Aprende magias apenas em níveis ímpares.\n• Mago: Lança magias por estudo e memorização de grimório. Atributo-chave: Inteligência. Só lança magias memorizadas (metade das conhecidas).",
+      "descricao": "PV: 8 (+2/nível). PM: 6/nível.\nAtributo-chave: Inteligência ou Carisma.\nPerícias fixas: misticismo, vontade + 2 à escolha.\nLista: conhecimento, diplomacia, enganacao, guerra, iniciativa, intimidacao, intuicao, investigacao, nobreza, oficio, percepcao.\nProficiências: Nenhuma armadura, armas simples.\n\nMAGIAS CONHECIDAS (arcanas):\n• 1º nível: 3 magias de 1º círculo.\n• A cada nível seguinte: +1 magia de qualquer círculo que possa lançar.\n• Acesso a círculos: 1º (1º nível), 2º (5º), 3º (9º), 4º (13º), 5º (17º).\n\nSubtipos: Bruxo, Feiticeiro, Mago.\n• Bruxo: Lança magias através de um foco (varinha, cajado). Atributo-chave: Inteligência.\n• Feiticeiro: Lança magias por poder inato no sangue. Escolha uma linhagem. Atributo-chave: Carisma. Aprende magia nova APENAS em níveis ÍMPARES (3º, 5º, 7º...).\n• Mago: Lança magias por estudo e memorização de grimório. Atributo-chave: Inteligência. Só lança magias memorizadas (metade das conhecidas). Começa com 1 magia adicional (total de 4 no 1º nível) e ganha +1 magia ao acessar cada novo círculo.",
       "tipo": "classe",
       "requisitos": "Atributo-chave: Inteligência ou Carisma",
-      "acao": "PV: 8+2/nv | PM: 6/nv | misticismo, vontade +2"
+      "acao": "PV: 8+2/nv | PM: 6/nv | 3 magias no 1º, +1/nv (Feiticeiro: ímpares; Mago: +1 por círculo)"
     }
   },
   {
@@ -22,10 +22,10 @@ const DATA = [
   {
     "name": "Bardo",
     "system": {
-      "descricao": "PV: 12 (+3/nível). PM: 4/nível.\nAtributo-chave: Carisma.\nPerícias fixas: atuacao, reflexos + 6 à escolha.\nLista: acrobacia, cavalgar, conhecimento, diplomacia, enganacao, furtividade, iniciativa, intuicao, investigacao, jogatina, ladinagem, misticismo, nobreza, percepcao, pontaria.\nProficiências: Armaduras leves, escudos, armas marciais.",
+      "descricao": "PV: 12 (+3/nível). PM: 4/nível.\nAtributo-chave: Carisma.\nPerícias fixas: atuacao, reflexos + 6 à escolha.\nLista: acrobacia, cavalgar, conhecimento, diplomacia, enganacao, furtividade, iniciativa, intuicao, investigacao, jogatina, ladinagem, misticismo, nobreza, percepcao, pontaria.\nProficiências: Armaduras leves, escudos, armas marciais.\n\nMAGIAS CONHECIDAS (arcanas, 3 escolas à escolha):\n• 1º nível: 2 magias de 1º círculo.\n• A cada nível PAR (2º, 4º, 6º...): +1 magia de qualquer círculo e escola que possa lançar.\n• Acesso a círculos: 1º (1º nível), 2º (6º), 3º (10º), 4º (14º).\n• Pode lançar com armadura leve sem teste de Misticismo.",
       "tipo": "classe",
       "requisitos": "Atributo-chave: Carisma",
-      "acao": "PV: 12+3/nv | PM: 4/nv | atuacao, reflexos +6"
+      "acao": "PV: 12+3/nv | PM: 4/nv | 2 magias no 1º, +1 por nível PAR"
     }
   },
   {
@@ -58,19 +58,19 @@ const DATA = [
   {
     "name": "Clérigo",
     "system": {
-      "descricao": "PV: 16 (+4/nível). PM: 5/nível.\nAtributo-chave: Sabedoria.\nPerícias fixas: religiao, vontade + 2 à escolha.\nLista: conhecimento, cura, diplomacia, fortitude, iniciativa, intuicao, misticismo, nobreza, oficio, percepcao.\nProficiências: Armaduras pesadas, escudos, armas simples.",
+      "descricao": "PV: 16 (+4/nível). PM: 5/nível.\nAtributo-chave: Sabedoria.\nPerícias fixas: religiao, vontade + 2 à escolha.\nLista: conhecimento, cura, diplomacia, fortitude, iniciativa, intuicao, misticismo, nobreza, oficio, percepcao.\nProficiências: Armaduras pesadas, escudos, armas simples.\n\nMAGIAS CONHECIDAS (divinas):\n• 1º nível: 3 magias de 1º círculo.\n• A cada nível seguinte: +1 magia de qualquer círculo que possa lançar.\n• Acesso a círculos: 1º (1º nível), 2º (5º), 3º (9º), 4º (13º), 5º (17º).",
       "tipo": "classe",
       "requisitos": "Atributo-chave: Sabedoria",
-      "acao": "PV: 16+4/nv | PM: 5/nv | religiao, vontade +2"
+      "acao": "PV: 16+4/nv | PM: 5/nv | 3 magias no 1º, +1/nv"
     }
   },
   {
     "name": "Druida",
     "system": {
-      "descricao": "PV: 16 (+4/nível). PM: 4/nível.\nAtributo-chave: Sabedoria.\nPerícias fixas: sobrevivencia, vontade + 4 à escolha.\nLista: adestramento, atletismo, cavalgar, conhecimento, cura, fortitude, iniciativa, intuicao, misticismo, oficio, percepcao, religiao.\nProficiências: Armaduras leves, escudos, armas simples.",
+      "descricao": "PV: 16 (+4/nível). PM: 4/nível.\nAtributo-chave: Sabedoria.\nPerícias fixas: sobrevivencia, vontade + 4 à escolha.\nLista: adestramento, atletismo, cavalgar, conhecimento, cura, fortitude, iniciativa, intuicao, misticismo, oficio, percepcao, religiao.\nProficiências: Armaduras leves, escudos, armas simples.\n\nMAGIAS CONHECIDAS (divinas, 3 escolas à escolha):\n• 1º nível: 2 magias de 1º círculo.\n• A cada nível PAR (2º, 4º, 6º...): +1 magia de qualquer círculo e escola que possa lançar.\n• Acesso a círculos: 1º (1º nível), 2º (6º), 3º (10º), 4º (14º).",
       "tipo": "classe",
       "requisitos": "Atributo-chave: Sabedoria",
-      "acao": "PV: 16+4/nv | PM: 4/nv | sobrevivencia, vontade +4"
+      "acao": "PV: 16+4/nv | PM: 4/nv | 2 magias no 1º, +1 por nível PAR"
     }
   },
   {

@@ -8,6 +8,13 @@ import { T20NpcSheet } from "./module/actor/npc-sheet.mjs";
 import { T20ItemSheet } from "./module/item/item-sheet.mjs";
 import { parseStatblock } from "./module/statblock-parser.mjs";
 import { importT20CharacterPdf, createActorFromPdf } from "./module/pdf-importer.mjs";
+import {
+  T20_CONDITIONS,
+  registerT20StatusEffects,
+  registerT20ConditionHooks,
+  syncAllConditionsToTokens,
+} from "./module/conditions.mjs";
+import { registerT20Initiative, rollT20Initiative } from "./module/combat.mjs";
 
 /* ---------------------------------------- */
 /*  Handlebars Helpers                      */
@@ -69,11 +76,21 @@ Hooks.once("init", function () {
   // ── Registrar classe Actor customizada ──
   CONFIG.Actor.documentClass = T20Actor;
 
+  // ── Iniciativa do Combat Tracker (1d20 + iniciativa.total) ──
+  registerT20Initiative();
+
+  // ── Condições T20 como status effects (ícones no token) ──
+  registerT20StatusEffects();
+
   game.tormenta20 = {
     T20Actor, T20ActorSheet, T20NpcSheet, T20ItemSheet,
     parseStatblock,
     importT20CharacterPdf,
     createActorFromPdf,
+    // Condições / Combat
+    T20_CONDITIONS,
+    syncAllConditions: syncAllConditionsToTokens,
+    rollInitiative: rollT20Initiative,
     /**
      * API: importa uma ficha de PDF T20 (formulário AcroForm Jambo)
      * para o ator passado. Ex. para macros:
@@ -146,6 +163,10 @@ async function preloadHandlebarsTemplates() {
 
 Hooks.once("ready", () => {
   console.log("T20 | Pronto para jogar!");
+
+  // ── Sincronização checkbox-ficha ↔ ícone-token das condições ──
+  registerT20ConditionHooks();
+
   // Marca o <body> pra que as regras de CSS com escopo no sistema funcionem
   document.body.classList.add("system-tormenta20");
   // Helper: detecta ausência de cena ativa pra aplicar fundo Firelink
